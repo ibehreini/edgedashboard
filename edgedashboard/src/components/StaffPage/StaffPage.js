@@ -3,12 +3,25 @@ import NavBar from '../NavBar/NavBar';
 import WorkshopGrid from '../StaffPage/WorkshopGrid';
 
 class StaffPage extends Component {
+  constructor () {
+    super()
+    this.state = {
+      isHidden: true
+    }
+  }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+
   render() {
     return (
       <div className="StaffPage">
         <NavBar />
         <h2>Staff stuff will be here!</h2>
-        <WorkshopGrid />
+        <button onClick={this.toggleHidden.bind(this)} >Click Here</button>
+        {!this.state.isHidden && <WorkshopGrid />}
       </div>
     );
   }
