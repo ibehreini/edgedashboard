@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
 
 const styles = {
   list: {
@@ -29,30 +30,35 @@ class NavBar extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    const sideList = (
-      <div className={classes.list}>
-        <List>
-          {['View Workshop Stats', 'View Event Statsd', 'View Mentor Notes'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    );
-
     return (
       <div>
-        <Button onClick={this.toggleDrawer('left', true)}>Menu</Button>
+        <Button onClick={this.toggleDrawer('left', true)}>Open Left</Button>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
           <div
             tabIndex={0}
             role="button"
             onClick={this.toggleDrawer('left', false)}
             onKeyDown={this.toggleDrawer('left', false)}
-          >
-            {sideList}
+          > 
+            <div className={classes.list}>
+              <List>
+                <Link to="/staff/workshops">
+                  <ListItem button key='Workshops'>
+                    <ListItemText primary='Workshops' />
+                  </ListItem>
+                </Link>
+                <Link to="/staff/events">
+                  <ListItem button key='Events'>
+                    <ListItemText primary='Events' />
+                  </ListItem>
+                </Link>
+                <Link to="/staff/timesheets">
+                  <ListItem button key='Timesheets'>
+                    <ListItemText primary='Timesheets' />
+                  </ListItem>
+                </Link>
+              </List>
+            </div>
           </div>
         </Drawer>
       </div>

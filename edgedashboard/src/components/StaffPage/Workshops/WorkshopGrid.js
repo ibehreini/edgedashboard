@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import Grid from '@material-ui/core/Grid';
 
 class WorkshopGrid extends Component {
     constructor(props) {
@@ -23,18 +24,27 @@ class WorkshopGrid extends Component {
     }
   
     render() {
-      return (
-        <div 
-          className="ag-theme-balham"
-          style={{ 
-          height: '500px', 
-          width: '600px' }} 
-        >
-          <AgGridReact
-            columnDefs={this.state.columnDefs}
-            rowData={this.state.rowData}>
-          </AgGridReact>
-        </div>
+        return (
+          <div
+            className="ag-theme-fresh"
+            style={{ 
+              borderWidth: 0.5,
+              vorderColor: '#d6d7da',
+              width: '50%',
+              margin: 'auto' }} 
+          >
+            <div 
+              className="ag-theme-fresh"
+              style={{ 
+              height: '500px',    
+              width: '800px' }} 
+            >
+              <AgGridReact
+                columnDefs={this.state.columnDefs}
+                rowData={this.state.rowData}>
+              </AgGridReact>
+            </div>
+          </div>
       );
     }
   }

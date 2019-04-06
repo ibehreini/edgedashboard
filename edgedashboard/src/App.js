@@ -3,7 +3,9 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import StaffPage from './components/StaffPage/StaffPage';
+import WorkshopPage from './components/StaffPage/Workshops/WorkshopPage';
+import TimesheetPage from './components/StaffPage/Timesheets/TimesheetPage';
+import EventPage from './components/StaffPage/Events/EventPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import StudentPage from './components/StudentPage/StudentPage';
 import MentorPage from './components/MentorPage/MentorPage';
@@ -12,8 +14,16 @@ const Login = () => (
   <LoginPage />
 );
 
-const Staff = () => (
-  <StaffPage />
+const StaffWorkshopView = () => (
+  <WorkshopPage />
+);
+
+const StaffEventView = () => (
+  <EventPage />
+);
+
+const StaffTimesheetView = () => (
+  <TimesheetPage />
 );
 
 const Student = () => (
@@ -30,7 +40,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={Login} />
-          <Route path="/staff" component={Staff} />
+          <Route path="/staff/workshops" component={StaffWorkshopView} />
+          <Route path="/staff/events" component={StaffEventView} />
+          <Route path="/staff/timesheets" component={StaffTimesheetView} />
           <Route path="/student" component={Student} />
           <Route path="/mentor" component={Mentor} />
         </div>
