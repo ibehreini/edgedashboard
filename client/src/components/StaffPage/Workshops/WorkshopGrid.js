@@ -22,7 +22,20 @@ class WorkshopGrid extends Component {
         }]
       }
     }
+
+    getAttendanceRecords = () => {
+      fetch(`http://localhost:5000/api/attendance/`)
+      .then(res => res.json())
+      .then(res => {
+        var attendanceRecords = res.map(r => [r.eventtime, r.username]);
+        console.log(attendanceRecords);
+      });
+    };
   
+   componentDidMount() {
+     this.getAttendanceRecords();
+   }
+
     render() {
         return (
           <div
