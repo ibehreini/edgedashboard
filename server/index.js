@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api/events', require('./api/events'));
 
+app.use('/api/attendance', require('./api/attendance'));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);
@@ -26,6 +27,12 @@ db.query("Select * from events", (err,res) => {
 if (err.error)
     return console.log(err.error);
 console.log(`PostgreSQL connected: ${res[0].title}.`)
+});
+
+db.query("Select * from attendance", (err,res) => {
+if (err.error)
+    return console.log(err.error);
+console.log(`PostgreSQL connected: ${res[0].eventtime}.`)
 });
 
 module.exports = app;
