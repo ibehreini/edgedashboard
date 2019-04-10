@@ -39,6 +39,7 @@ class WorkshopGrid extends Component {
               height: '500px',    
               width: '800px' }} 
             >
+            {this.props.selectedWorkshop}
               <AgGridReact
                 columnDefs={this.state.columnDefs}
                 rowData={this.state.rowData}>
