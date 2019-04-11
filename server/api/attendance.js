@@ -11,4 +11,13 @@ attendance.retrieveAll((err, attendance) => {
   });  
 });
 
+router.get('/time/:eventtime', (req, res) => {
+	var eventtime = req.params.eventtime;
+attendance.retrieveAttending(eventtime, (err, attendance) => {
+    if (err)
+      return res.json(err);
+    return res.json(attendance);
+  });  
+});
+
 module.exports = router;

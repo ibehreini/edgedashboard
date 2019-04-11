@@ -22,7 +22,7 @@ class WorkshopGrid extends Component {
     }
 
     getAttendanceRecords = () => {
-      fetch(`http://localhost:5000/api/attendance/`)
+      fetch(`http://localhost:5000/api/attendance/time/${this.props.selectedWorkshop}`)
       .then(res => res.json())
       .then(res => {
         var rowData = res.map(r => [r.eventtime, r.username, r.transportneeds, r.notes]);
