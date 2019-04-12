@@ -21,6 +21,14 @@ router.get('/w', (req, res) => {
     });
   });
 
+router.get('/e', (req, res) => {
+  events.retrieveAllEvents('Event', (err, events) => {
+      if (err)
+        return res.json(err);
+      return res.json(events);
+    });
+  });
+
 router.post('/', (req, res) => {
   var event = req.body.event;
   var evdate = req.body.evdate
