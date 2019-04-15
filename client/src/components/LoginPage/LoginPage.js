@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class LoginPage extends Component {
     render() {
       return (
-        <div className="HomePage">
+        <div>
           <h2>Everyone will login here!</h2>
         </div>
       );
