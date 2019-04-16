@@ -25,7 +25,7 @@ app.listen(PORT, () => {
 db.query("Select * from events", (err,res) => {
 if (err.error)
     return console.log(err.error);
-console.log(`PostgreSQL connected: ${res[0].title}.`)
+console.log(`PostgreSQL connected, Event table queried successfully.`)
 });
 
 module.exports = app;
