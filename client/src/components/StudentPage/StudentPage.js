@@ -31,9 +31,9 @@ class StudentPage extends Component
       const textAreaStyle = { width: "80\%",
                               height: "100px" },
             fieldTemplate = (field, index) => (
-              <p><FormField name={"moreInfo" + index} label={field}>
-                <textarea style={textAreaStyle} />
-              </FormField></p> ),
+                        <p><FormField name={"moreInfo" + index} label={field}>
+                          <textarea style={textAreaStyle} />
+                        </FormField></p> ),
             textFields = fields.map( fieldTemplate );
 
       return ( <Fragment>

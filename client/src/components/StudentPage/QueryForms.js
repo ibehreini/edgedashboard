@@ -19,9 +19,15 @@ export class FormField extends Component
   }
 }
 
-/*A form with data that will either create or update data in our database*/
+/*A form with data that will either create or update data in our database
+* Expects posturl in props*/
 class CreateUpdateForm extends Component
 {
+  async post()
+  {
+    let res = await fetch(`http://localhost:5000/api/` + this.props.posturl )
+    return res.json();
+  }
   //Appropriately space children vertically
   spaceChildren()
   {
