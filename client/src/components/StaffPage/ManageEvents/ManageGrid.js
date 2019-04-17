@@ -9,17 +9,19 @@ class ManageGrid extends Component {
       super(props);
       this.state = {
         columnDefs: [{
-          headerName: "Event Date", field: "0", editable: true
+          headerName: "Check", field: "0, ", checkboxSelection: true
         }, {
-          headerName: "Type", field: "1", editable: true
+          headerName: "Event Date", field: "1", editable: true
         }, {
-          headerName: "Location", field: "2", editable: true
+          headerName: "Type", field: "2", editable: true
         }, {
-          headerName: "title", field: "3", editable: true
+          headerName: "Location", field: "3", editable: true
         }, {
-          headerName: "Description", field: "4", editable: true
+          headerName: "title", field: "4", editable: true
         }, {
-          headerName: "Time", field: "5", editable: true
+          headerName: "Description", field: "5", editable: true
+        }, {
+          headerName: "Time", field: "6", editable: true
         }],
         rowData: []
       }
@@ -52,25 +54,22 @@ class ManageGrid extends Component {
     }
 
     updateRows = () => {
-     var rowData = [];
-      this.gridApi.forEachNode(function(node) {
-        rowData.push(node.data);
-      });
-      console.log(this.state.rowData);
-      console.log(rowData);
+      const selectedNodes = this.gridApi.getSelectedNodes()
+      const rowData = selectedNodes.map( node => node.data )
       this.setState({rowData}, () => console.log(this.state.rowData));
-      const newItem = [{0: 'Enter date', 1: 'E/W', 2: 'Enter Location', 3: 'Enter title', 4: 'Enter desc'}, {5: 'Enter time'}];
+      let fucker = {
+        eventdate: rowData[0][1],
+        eventtype: rowData[0][2],
+        eventlocation: rowData[0][3],
+        title: rowData[0][4],
+        description: rowData[0][5],
+        eventtime: rowData[0][6]
+      }
+      console.log(fucker);
       fetch('http://localhost:5000/api/events/', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          eventtime: '1111-11-11',
-          eventtype: 'Event',
-          eventlocation: 'EVIE',
-          title: 'learn how to suck dick',
-          description: 'KIBBLE',
-          eventtime: '12:00:00'
-        })
+        body: JSON.stringify(fucker)
       })
       .then(res => res.json())
       .then(res => {
@@ -97,6 +96,7 @@ class ManageGrid extends Component {
               <button onClick={this.addRow.bind(this)}>Add Row</button>
               <button onClick={this.updateRows.bind(this)}>Save</button>
               <AgGridReact
+                rowSelection="multiple"
                 onGridReady={ params => this.gridApi = params.api }
                 columnDefs={this.state.columnDefs}
                 rowData={this.state.rowData}>
