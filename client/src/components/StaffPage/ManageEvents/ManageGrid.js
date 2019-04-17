@@ -56,6 +56,8 @@ class ManageGrid extends Component {
       this.gridApi.forEachNode(function(node) {
         rowData.push(node.data);
       });
+      console.log(this.state.rowData);
+      console.log(rowData);
       this.setState({rowData}, () => console.log(this.state.rowData));
       const newItem = [{0: 'Enter date', 1: 'E/W', 2: 'Enter Location', 3: 'Enter title', 4: 'Enter desc'}, {5: 'Enter time'}];
       fetch('http://localhost:5000/api/events/', {
