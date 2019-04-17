@@ -10,7 +10,7 @@
     "server": "nodemon server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
-    "start": "node ./app/client/src/index.js"
+    "start": "node ./client/src/index.js"
   },
   "keywords": [
     "react"
@@ -28,6 +28,8 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "pg": "^7.9.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
   }
 }
