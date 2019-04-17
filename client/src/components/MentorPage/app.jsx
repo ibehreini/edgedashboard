@@ -89,6 +89,8 @@ class RIGHT_SPAN extends React.Component {
               rows="5"
               cols="40"
             />
+
+            <input type="submit" value="Submit" />
           </form>
         </div>
       </span>
