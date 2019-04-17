@@ -10,7 +10,7 @@
     "server": "nodemon server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
-    "start": "node /app/client/src/index.js"
+    "start": "node ./app/client/src/index.js"
   },
   "keywords": [
     "react"
