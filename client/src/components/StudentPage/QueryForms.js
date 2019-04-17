@@ -19,28 +19,60 @@ export class FormField extends Component
   }
 }
 
-/*A form with data that will either create or update data in our database
-* Expects posturl in props*/
-class CreateUpdateForm extends Component
+/*A form with data that will be sent to the server using POST
+* Expects the following props:
+ - posturl: the last part of a server api call to post to
+ - id*/
+class PostForm extends Component
 {
-  async post()
+  constructor( props )
   {
-    let res = await fetch(`http://localhost:5000/api/` + this.props.posturl )
-    return res.json();
+    super( props )
+    this.post = this.post.bind( this )
+  }
+  post( event )
+  {
+    event.preventDefault();
+    const data = { event: 1,
+                   user: "me",
+                   transportation: 'paratransport',
+                   notes: "" }; //new FormData( event.target );
+    console.log( "POSTing ", data );
+    fetch( `http://localhost:5000/api/` + this.props.posturl,
+           { method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify( data )
+           }
+         )
+         .then( res => res.json() )
+         .then( res => { this.handleRedirect( res ); } )
+  }
+  handleRedirect( res )
+  {
+      if( res.status === 200 )
+      {
+          // redirect here
+          console.log( "Ya did it" );
+      }
+      else
+      {
+        console.log( "No!" )
+      }
+
   }
   //Appropriately space children vertically
   spaceChildren()
   {
-    return React.Children.map( this.props.children, c => <p>{c}</p> );
+    return React.Children.map( this.props.children, c => <div>{c}</div> );
   }
   render()
   {
     return (
-        <form method="post">
+        <form method="post" encType="multipart/form-data" onSubmit={this.post}>
           {this.spaceChildren()}
         </form>
       );
   }
 }
 
-export default CreateUpdateForm;
+export default PostForm;

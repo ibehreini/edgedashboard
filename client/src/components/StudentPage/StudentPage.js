@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import CreateUpdateForm, {FormField} from './QueryForms'
+import PostForm, {FormField} from './QueryForms'
 
 function eventQuery()
 {
-  return {
-            name: 'College Visit',
+  return {  name: 'College Visit',
             time: new Date(),
             infoFields: [ "Please list any dietary needs (allergies etc.).",
                           "Tell us your favorite animal." ]
@@ -13,7 +12,9 @@ function eventQuery()
 
 function makeDropdown( optionsList )
 {
-  return optionsList.map( o => <option value={o.toLowerCase()}>{o}</option> );
+  return optionsList.map( o => <option value={o.toLowerCase()} key={o.toLowerCase()}>
+                                {o}
+                              </option> );
 }
 
 class StudentPage extends Component
@@ -28,12 +29,12 @@ class StudentPage extends Component
     const fields = this.state.event.infoFields;
     if (fields.length > 0)
     {
-      const textAreaStyle = { width: "80\%",
+      const textAreaStyle = { width: "80%",
                               height: "100px" },
             fieldTemplate = (field, index) => (
-                        <p><FormField name={"moreInfo" + index} label={field}>
+                        <div><FormField name={"moreInfo" + index} label={field}>
                           <textarea style={textAreaStyle} />
-                        </FormField></p> ),
+                        </FormField></div> ),
             textFields = fields.map( fieldTemplate );
 
       return ( <Fragment>
@@ -50,8 +51,8 @@ class StudentPage extends Component
     return (
       <div className="StudentPage">
         <h1>Sign up for {this.state.event.name}</h1>
-        <CreateUpdateForm props={this.state.event} title="Student Registration">
-        <FormField name="studentname" label="Full Name">
+        <PostForm props={this.state.event} title="Student Registration">
+        <FormField name="studentname" label="Full Name" id="attendanceform" posturl="attendance">
           <input type="text"/>
         </FormField>
         <FormField name="transportation" label="Transportation Method">
@@ -61,12 +62,10 @@ class StudentPage extends Component
         </FormField>
         {this.makeOptionalFields()}
         <input type="submit" value="Register"/>
-        </CreateUpdateForm>
+        </PostForm>
       </div>
     );
   }
 }
-
-
 
 export default StudentPage;

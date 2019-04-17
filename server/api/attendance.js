@@ -23,4 +23,5 @@ router.post( '/', (req, res) => {
                     return res.json(err);
                   return res.json(result);
                 } );
+  res.send('received POST data: ' + req.body.data );
 } );
