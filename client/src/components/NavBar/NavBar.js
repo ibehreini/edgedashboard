@@ -57,6 +57,11 @@ class NavBar extends React.Component {
                     <ListItemText primary='Timesheets' />
                   </ListItem>
                 </Link>
+				<Link to="/staff/manageevents">
+                  <ListItem button key='Manage'>
+                    <ListItemText primary='Manage Events' />
+                  </ListItem>
+                </Link>
               </List>
             </div>
           </div>

@@ -9,11 +9,11 @@ class EventGrid extends Component {
       super(props);
       this.state = {
         columnDefs: [{
-          headerName: "Event Date", field: "0"
+          headerName: "Event Date", field: "0", editable: true
         }, {
           headerName: "Name", field: "1"
         }, {
-          headerName: "Transport Needs", field: "2"
+          headerName: "Transport Needs", field: "2", editable: true
         }, {
           headerName: "Other NOtes", field: "3"
         }],
