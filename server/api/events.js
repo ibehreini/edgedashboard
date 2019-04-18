@@ -10,7 +10,7 @@ events.retrieveAll((err, events) => {
     return res.json(events);
   });
 
-
+  
 });
 
 router.get('/w', (req, res) => {

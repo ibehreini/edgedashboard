@@ -56,6 +56,42 @@ class ManageGrid extends Component {
     updateRows = () => {
       const selectedNodes = this.gridApi.getSelectedNodes()
       const rowData = selectedNodes.map( node => node.data )
+ //     console.log(rowData);
+    //   const rowData2 = rowData.map( row => [ row[0], row[1], row[2], row[3], row[4], row[5] ]);
+    //   let fucker = {
+   //      0: rowData[0][1],
+  //       1: rowData[0][2],
+  //       2: rowData[0][3],
+  //       3: rowData[0][4],
+  //       4: rowData[0][5],
+    //     5: rowData[0][6]
+ //      }
+//       console.log(JSON.stringify(fucker));
+//       console.log(JSON.stringify({eventdate: '2019-01-01', eventtype: 'Workshop', eventlocation: 'bayonne', title: 'la' description: 'yay', eventtime: '10:00:00'}));
+        rowData.forEach(row=>{
+          let evie = {}
+          for (let i = 1; i<row.length; i++) {
+            evie[i.toString()] = row[i]
+          }
+          console.log(JSON.stringify(evie));
+          console.log(JSON.stringify({1: '1111-11-11', 2: 'Event', 3: 'LA', 4: 'learn', 5: 'blah', 6: '10:00:00'}));
+        fetch('http://localhost:5000/api/events/', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(evie)
+        })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.getAll();
+        });
+      })
+    }
+  
+ /*
+    updateRows = () => {
+      const selectedNodes = this.gridApi.getSelectedNodes()
+      const rowData = selectedNodes.map( node => node.data )
       this.setState({rowData}, () => console.log(this.state.rowData));
       let fucker = {
         eventdate: rowData[0][1],
@@ -76,7 +112,7 @@ class ManageGrid extends Component {
         this.getAll();
       });
     };
-
+*/
     render() {
         return (
           <div
