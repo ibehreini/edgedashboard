@@ -11,17 +11,17 @@ class ManageGrid extends Component {
         columnDefs: [{
           headerName: "Check", field: "0, ", checkboxSelection: true
         }, {
-          headerName: "Event Date", field: "1", editable: true
+          headerName: "Event Date", field: "eventdate", editable: true
         }, {
-          headerName: "Type", field: "2", editable: true
+          headerName: "Type", field: "eventtype", editable: true
         }, {
-          headerName: "Location", field: "3", editable: true
+          headerName: "Location", field: "eventlocation", editable: true
         }, {
-          headerName: "title", field: "4", editable: true
+          headerName: "title", field: "title", editable: true
         }, {
-          headerName: "Description", field: "5", editable: true
+          headerName: "Description", field: "description", editable: true
         }, {
-          headerName: "Time", field: "6", editable: true
+          headerName: "Time", field: "eventtime", editable: true
         }],
         rowData: []
       }
@@ -36,7 +36,19 @@ class ManageGrid extends Component {
       fetch(`http://localhost:5000/api/events/`)
       .then(res => res.json())
       .then(res => {
-        var rowData = res.map(r => [r.eventdate, r.eventtype, r.eventlocation, r.title, r.description, r.eventtime]);
+        var myData = res.map(r => [r.eventdate, r.eventtype, r.eventlocation, r.title, r.description, r.eventtime]);
+        let rowData = []
+        myData.forEach(row=>{
+          let ev = {}
+          ev['eventdate'] = row[0]
+        ev['eventtype'] = row[1]
+        ev['eventlocation'] = row[2]
+        ev['title'] = row[3]
+        ev['description'] = row[4]
+        ev['eventtime'] = row[5]
+        rowData.push(ev);
+        })
+        console.log(rowData);
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
     };
@@ -47,16 +59,17 @@ class ManageGrid extends Component {
 
     addRow() {
       let myArr = [];
-      const newItems = [{0: 'Enter date'}, {1: 'E/W'}, {2: 'Enter Location'}, {3: 'Enter title'}, {4: 'Enter desc'}, {5: 'Enter time'}];
+      const newItems = {eventdate: 'Enter', eventtype: 'E/W', eventlocation: 'Enter Location', title: 'Enter title', description: 'Enter desc', eventtime: 'Enter time'};
       myArr.push(newItems);
       // var map = Object.values(newItems);
       var res = this.gridApi.updateRowData({ add: myArr });
+      console.log(this.state.rowData);
     }
 
     updateRows = () => {
       const selectedNodes = this.gridApi.getSelectedNodes()
       const rowData = selectedNodes.map( node => node.data )
- //     console.log(rowData);
+ // console.log(rowData);
     //   const rowData2 = rowData.map( row => [ row[0], row[1], row[2], row[3], row[4], row[5] ]);
     //   let fucker = {
    //      0: rowData[0][1],
@@ -70,17 +83,23 @@ class ManageGrid extends Component {
 //       console.log(JSON.stringify({eventdate: '2019-01-01', eventtype: 'Workshop', eventlocation: 'bayonne', title: 'la' description: 'yay', eventtime: '10:00:00'}));
         rowData.forEach(row=>{
           let evie = {}
-          for (let i = 1; i<row.length; i++) {
-            evie[i.toString()] = row[i]
-          }
+      //     for (let i = 1; i<row.length; i++) {
+         //    evie[i.toString()] = row[i]
+        //   }
+        evie['eventdate'] = row.eventdate
+        evie['eventtype'] = row.eventtype
+        evie['eventlocation'] = row.eventlocation
+        evie['title'] = row.title
+        evie['description'] = row.description
+        evie['eventtime'] = row.eventtime
           console.log(JSON.stringify(evie));
-          console.log(JSON.stringify({1: '1111-11-11', 2: 'Event', 3: 'LA', 4: 'learn', 5: 'blah', 6: '10:00:00'}));
+          // console.log(JSON.stringify({1: '1111-11-11', 2: 'Event', 3: 'LA', 4: 'learn', 5: 'blah', 6: '10:00:00'}));
         fetch('http://localhost:5000/api/events/', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(evie)
         })
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(res => {
           console.log(res);
           this.getAll();
