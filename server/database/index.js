@@ -1,4 +1,5 @@
 var { Pool } = require('pg');
+const knex = require( 'knex' );
 
 const CONNECTION_STRING = process.env.DATABASE_URL || 'postgresql://postgres:Evie123^@localhost:5432/edgedb';
 const SSL = process.env.NODE_ENV === 'production';
@@ -16,6 +17,7 @@ class Database {
       process.exit(-1);
     });
 
+    this.queryMaker = knex;
   }
 
   query (query, ...args) {

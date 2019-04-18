@@ -10,7 +10,7 @@ class events {
   }
 
   static retrieveAllWorkshops (wStr, callback) {
-    db.query('SELECT title, eventdate from events where eventtype = $1 ', [wStr], (err, res) => {
+    db.query('SELECT title, eventTime from events where eventtype = $1 ', [wStr], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
