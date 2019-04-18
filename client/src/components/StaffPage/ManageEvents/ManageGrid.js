@@ -31,7 +31,7 @@ class ManageGrid extends Component {
       this.gridApi = params.api;
       this.gridColumnApi = params.columnApi;
     };
-  
+
     getAll = () => {
       fetch(`http://localhost:5000/api/events/`)
       .then(res => res.json())
@@ -81,17 +81,17 @@ class ManageGrid extends Component {
         return (
           <div
             className="ag-theme-fresh"
-            style={{ 
+            style={{
               borderWidth: 0.5,
               vorderColor: '#d6d7da',
               width: '50%',
-              margin: 'auto' }} 
+              margin: 'auto' }}
           >
-            <div 
+            <div
               className="ag-theme-fresh"
-              style={{ 
-              height: '500px',    
-              width: '1500px' }} 
+              style={{
+              height: '500px',
+              width: '1500px' }}
             >
               <button onClick={this.addRow.bind(this)}>Add Row</button>
               <button onClick={this.updateRows.bind(this)}>Save</button>
@@ -106,5 +106,5 @@ class ManageGrid extends Component {
       );
     }
   }
-  
+
   export default ManageGrid;

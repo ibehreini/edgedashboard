@@ -1,5 +1,4 @@
 var express = require('express');
-<<<<<<< HEAD
 var attendance = require('../models/attendance');
 
 var router = express.Router();
@@ -9,7 +8,15 @@ attendance.retrieveAll((err, attendance) => {
     if (err)
       return res.json(err);
     return res.json(attendance);
-  });  
+  });
+});
+
+router.get( '/:user', (req, res) => {
+  table.attendingIds( req.params.user, (err, events) => {
+      if (err)
+        return res.json(err);
+      return res.json(events);
+    });
 });
 
 router.get('/time/:eventtime', (req, res) => {
@@ -18,21 +25,7 @@ attendance.retrieveAttending(eventtime, (err, attendance) => {
     if (err)
       return res.json(err);
     return res.json(attendance);
-  });  
-});
-
-module.exports = router;
-=======
-var table = require('../models/attendance');
-
-var router = express.Router();
-
-router.get( '/:user', (req, res) => {
-  table.attendingIds( req.params.user, (err, events) => {
-      if (err)
-        return res.json(err);
-      return res.json(events);
-    });
+  });
 });
 
 router.post( '/', (req, res) => {
@@ -49,4 +42,5 @@ router.post( '/', (req, res) => {
                 } );
   res.send('received POST data: ' + req.body.data );
 } );
->>>>>>> development
+
+module.exports = router ;

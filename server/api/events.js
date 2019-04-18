@@ -35,8 +35,7 @@ router.post('/', (req, res) => {
   var eventlocation = req.body.eventlocation;
   var title = req.body.title;
   var description = req.body.description;
-  var eventtime = req.body.eventtime;
-  events.insert(eventdate, eventtype, eventlocation, title, description, eventtime, (err, result) => {
+  events.insert(eventdate, eventtype, eventlocation, title, description, (err, result) => {
     if (err)
       return res.json(err);
     return res.json(result);
