@@ -10,7 +10,7 @@ class events {
   }
 
   static retrieveAllWorkshops (wStr, callback) {
-    db.query('SELECT title, eventdate from events where eventtype = $1 ', [wStr], (err, res) => {
+    db.query('SELECT title, eventTime from events where eventtype = $1 ', [wStr], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
@@ -25,8 +25,8 @@ class events {
     });
   }
 
-  static insert (eventdate, eventtype, eventlocation, title, description, eventtime, callback) {
-    db.query('INSERT INTO events (eventdate, eventtype, eventlocation, title, description, eventtime) VALUES ($1, $2, $3, $4, $5, $6)', [eventdate, eventtype, eventlocation, title, description, eventtime], (err, res) => {
+  static insert (eventdate, eventtype, eventlocation, title, description, callback) {
+    db.query('INSERT INTO events (eventdate, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5, $6)', [eventdate, eventtype, eventlocation, title, description], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);

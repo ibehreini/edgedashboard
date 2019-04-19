@@ -25,7 +25,7 @@ class WorkshopGrid extends Component {
       fetch(`http://localhost:5000/api/attendance/time/${this.props.selectedWorkshop}`)
       .then(res => res.json())
       .then(res => {
-        var rowData = res.map(r => [r.eventtime, r.username, r.transportneeds, r.notes]);
+        var rowData = res.map(r => [r.eventdate, r.username, r.transportneeds, r.notes]);
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
     };
@@ -38,17 +38,17 @@ class WorkshopGrid extends Component {
         return (
           <div
             className="ag-theme-fresh"
-            style={{ 
+            style={{
               borderWidth: 0.5,
               vorderColor: '#d6d7da',
               width: '50%',
-              margin: 'auto' }} 
+              margin: 'auto' }}
           >
-            <div 
+            <div
               className="ag-theme-fresh"
-              style={{ 
-              height: '500px',    
-              width: '800px' }} 
+              style={{
+              height: '500px',
+              width: '800px' }}
             >
             {this.getAttendanceRecords()}
               <AgGridReact
@@ -60,5 +60,5 @@ class WorkshopGrid extends Component {
       );
     }
   }
-  
+
   export default WorkshopGrid;
