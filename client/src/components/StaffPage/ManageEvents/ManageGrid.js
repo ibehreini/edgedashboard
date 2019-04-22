@@ -11,7 +11,7 @@ class ManageGrid extends Component {
         columnDefs: [{
           headerName: "Check", field: "0, ", checkboxSelection: true
         }, {
-          headerName: "Event Date", field: "eventdate", editable: true
+          headerName: "Event Date", field: "eventtime", editable: true
         }, {
           headerName: "Type", field: "eventtype", editable: true
         }, {
@@ -20,8 +20,6 @@ class ManageGrid extends Component {
           headerName: "title", field: "title", editable: true
         }, {
           headerName: "Description", field: "description", editable: true
-        }, {
-          headerName: "Time", field: "eventtime", editable: true
         }],
         rowData: []
       }
@@ -36,16 +34,15 @@ class ManageGrid extends Component {
       fetch(`http://localhost:5000/api/events/`)
       .then(res => res.json())
       .then(res => {
-        var myData = res.map(r => [r.eventdate, r.eventtype, r.eventlocation, r.title, r.description, r.eventtime]);
+        var myData = res.map(r => [r.eventtime, r.eventtype, r.eventlocation, r.title, r.description]);
         let rowData = []
         myData.forEach(row=>{
           let ev = {}
-          ev['eventdate'] = row[0]
+          ev['eventtime'] = row[0]
         ev['eventtype'] = row[1]
         ev['eventlocation'] = row[2]
         ev['title'] = row[3]
         ev['description'] = row[4]
-        ev['eventtime'] = row[5]
         rowData.push(ev);
         })
         console.log(rowData);
@@ -59,7 +56,7 @@ class ManageGrid extends Component {
 
     addRow() {
       let myArr = [];
-      const newItems = {eventdate: 'Enter', eventtype: 'E/W', eventlocation: 'Enter Location', title: 'Enter title', description: 'Enter desc', eventtime: 'Enter time'};
+      const newItems = {eventtime: 'New Date', eventtype: 'event/workshop', eventlocation: 'New Location', title: 'New Title', description: 'New desc'};
       myArr.push(newItems);
       // var map = Object.values(newItems);
       var res = this.gridApi.updateRowData({ add: myArr });
@@ -86,12 +83,11 @@ class ManageGrid extends Component {
       //     for (let i = 1; i<row.length; i++) {
          //    evie[i.toString()] = row[i]
         //   }
-        evie['eventdate'] = row.eventdate
+        evie['eventtime'] = row.eventtime
         evie['eventtype'] = row.eventtype
         evie['eventlocation'] = row.eventlocation
         evie['title'] = row.title
         evie['description'] = row.description
-        evie['eventtime'] = row.eventtime
           console.log(JSON.stringify(evie));
           // console.log(JSON.stringify({1: '1111-11-11', 2: 'Event', 3: 'LA', 4: 'learn', 5: 'blah', 6: '10:00:00'}));
         fetch('http://localhost:5000/api/events/', {

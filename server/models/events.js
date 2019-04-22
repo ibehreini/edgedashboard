@@ -25,8 +25,8 @@ class events {
     });
   }
 
-  static insert (eventdate, eventtype, eventlocation, title, description, callback) {
-    db.query('INSERT INTO events (eventdate, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5, $6)', [eventdate, eventtype, eventlocation, title, description], (err, res) => {
+  static insert (eventtime, eventtype, eventlocation, title, description, callback) {
+    db.query('INSERT INTO events (eventtime, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5)', [eventtime, eventtype, eventlocation, title, description], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
