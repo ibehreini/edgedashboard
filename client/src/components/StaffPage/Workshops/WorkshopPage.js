@@ -21,7 +21,7 @@ class WorkshopPage extends Component {
     fetch(`http://localhost:5000/api/events/W`)
     .then(res => res.json())
     .then(res => {
-      var workshopList = res.map(r => [r.title, r.eventdate]);
+      var workshopList = res.map(r => [r.title, r.id]);
       this.setState({workshopList}, () => console.log(this.state.workshopList));
     });
   };

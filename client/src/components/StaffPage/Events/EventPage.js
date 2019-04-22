@@ -21,7 +21,7 @@ class EventPage extends Component {
     fetch(`http://localhost:5000/api/events/e`)
     .then(res => res.json())
     .then(res => {
-      var eventList = res.map(r => [r.title, r.eventdate]);
+      var eventList = res.map(r => [r.title, r.id]);
       this.setState({eventList}, () => console.log(this.state.eventList));
     });
   };

@@ -19,9 +19,9 @@ router.get( '/:user', (req, res) => {
     });
 });
 
-router.get('/time/:eventtime', (req, res) => {
-	var eventtime = req.params.eventtime;
-attendance.retrieveAttending(eventtime, (err, attendance) => {
+router.get('/time/:event', (req, res) => {
+	var event = req.params.event;
+attendance.retrieveAttending(event, (err, attendance) => {
     if (err)
       return res.json(err);
     return res.json(attendance);

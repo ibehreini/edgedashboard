@@ -9,13 +9,11 @@ class WorkshopGrid extends Component {
       super(props);
       this.state = {
         columnDefs: [{
-          headerName: "Event Date", field: "0"
+          headerName: "Name", field: "0"
         }, {
-          headerName: "Name", field: "1"
+          headerName: "Transport Needs", field: "1"
         }, {
-          headerName: "Transport Needs", field: "2"
-        }, {
-          headerName: "Other NOtes", field: "3"
+          headerName: "Other NOtes", field: "2"
         }],
         rowData: []
       }
@@ -25,7 +23,8 @@ class WorkshopGrid extends Component {
       fetch(`http://localhost:5000/api/attendance/time/${this.props.selectedWorkshop}`)
       .then(res => res.json())
       .then(res => {
-        var rowData = res.map(r => [r.eventdate, r.username, r.transportneeds, r.notes]);
+        console.log(res);
+        var rowData = res.map(r => [r.username, r.transportneeds, r.notes]);
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
     };

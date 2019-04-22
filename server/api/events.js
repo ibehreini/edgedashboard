@@ -22,7 +22,7 @@ router.get('/w', (req, res) => {
   });
 
 router.get('/e', (req, res) => {
-  events.retrieveAllEvents('Event', (err, events) => {
+  events.retrieveAllEvents('event', (err, events) => {
       if (err)
         return res.json(err);
       return res.json(events);

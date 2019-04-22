@@ -19,8 +19,8 @@ class EventAttendance
     });
   }
 
-  static retrieveAttending (eventtime, callback) {
-    db.query('SELECT * from attendance where eventtime = $1 ', [eventtime], (err, res) => {
+  static retrieveAttending (event, callback) {
+    db.query('SELECT * from attendance where event = $1 ', [event], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
