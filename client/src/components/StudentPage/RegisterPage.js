@@ -30,7 +30,14 @@ handleSubmit(event) {
   submission['transportneeds'] = this.state.selectedTransport
   submission['notes'] = this.state.notes
   console.log(submission);
-  alert('Success!');
+  fetch('http://localhost:5000/api/attendance/attending', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submission)
+        })
+        .then(res => {
+          alert('Success!');
+        });
   event.preventDefault();
 }
 
