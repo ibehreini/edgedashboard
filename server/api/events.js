@@ -21,6 +21,14 @@ router.get('/w', (req, res) => {
     });
   });
 
+  router.get('/next', (req, res) => {
+    events.retrieveNextFew((err, events) => {
+        if (err)
+          return res.json(err);
+        return res.json(events);
+      });
+    });
+  
 router.get('/e', (req, res) => {
   events.retrieveAllEvents('event', (err, events) => {
       if (err)

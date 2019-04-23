@@ -27,6 +27,14 @@ class EventAttendance
     });
   }
 
+  static insertAttending (event, username, transportneeds, notes, callback) {
+    db.query('INSERT INTO attendance (event, username, transportneeds, notes) VALUES ($1, $2, $3, $4)', [event, username, transportneeds, notes], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
+  }
+
   static insert( eventKey, userKey, transportation, notes, callback )
   {
     const qstring = db.queryMaker( 'Attendance' ).insert(

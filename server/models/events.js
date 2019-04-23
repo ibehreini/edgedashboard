@@ -25,6 +25,14 @@ class events {
     });
   }
 
+  static retrieveNextFew (callback) {
+    db.query('SELECT * from events where eventtime > now() limit 4', (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
+  }
+
   static insert (eventtime, eventtype, eventlocation, title, description, callback) {
     db.query('INSERT INTO events (eventtime, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5)', [eventtime, eventtype, eventlocation, title, description], (err, res) => {
       if (err.error)

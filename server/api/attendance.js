@@ -28,6 +28,18 @@ attendance.retrieveAttending(event, (err, attendance) => {
   });
 });
 
+router.post('/attending', (req, res) => {
+  var event = req.body.event;
+  var username = req.body.username;
+  var transportneeds = req.body.transportneeds;
+  var notes = req.body.notes;
+  attendance.insertAttending(event, username, transportneeds, notes, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
+
 router.post( '/', (req, res) => {
   console.log( req );
   const reqbody = req.body
