@@ -38,8 +38,8 @@ handleSubmit(event) {
               onChange={(e) => this.setState({selectedTransport: e.target.value}, () => console.log(this.state)) }>
             <option value="" disabled selected>Select Method of Transport</option>
             <option value = 'pickup'>Pickup</option>
-            <option value = 'paratransit'>Access Link</option>
-            <option value = 'needed'>Public Transit</option>
+            <option value = 'paratransport'>Access Link</option>
+            <option value = 'public'>Public Transit</option>
           </select></label>
         </div>
         <div><label>Notes<input type="text" value={this.state.notes} onChange={this.handleChangedNotes}></input></label></div>
