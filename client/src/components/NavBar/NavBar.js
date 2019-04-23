@@ -62,6 +62,11 @@ class NavBar extends React.Component {
                     <ListItemText primary='Manage Events' />
                   </ListItem>
                 </Link>
+                <Link to="/staff/members">
+                  <ListItem button key='members'>
+                    <ListItemText primary='Manage Enrollment' />
+                  </ListItem>
+                </Link>
               </List>
             </div>
           </div>
