@@ -24,14 +24,20 @@ handleChangedNotes(event) {
 }
 
 handleSubmit(event) {
-  alert('Username is ' + this.state.name + 'Notes is ' + this.state.selectedTransport);
+  let submission = {}
+  submission['event'] = this.props.upcomingEvent[0]
+  submission['username'] = this.state.name
+  submission['transportneeds'] = this.state.selectedTransport
+  submission['notes'] = this.state.notes
+  console.log(submission);
+  alert('Success!');
   event.preventDefault();
 }
 
    loginForm() {
      return (
       <form onSubmit={this.handleSubmit}>
-        <div><h2>Register for {this.props.upcomingEvent[1]}</h2></div>
+        <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
         <div><label>Name<input type="text" value={this.state.name} onChange={this.handleChangedName}></input></label></div>
         <div><label>How are you getting to / from the event?
         <select value={this.state.selectedTransport} 

@@ -39,7 +39,7 @@ class ControlledExpansionPanels extends React.Component {
     fetch(`http://localhost:5000/api/events/next`)
     .then(res => res.json())
     .then(res => {
-      var upcomingEvents = res.map(r => [r.eventtime, r.title, r.eventtype, r.eventlocation, r.description]);
+      var upcomingEvents = res.map(r => [r.id, r.eventtime, r.title, r.eventtype, r.eventlocation, r.description]);
       this.setState({upcomingEvents}, () => console.log(this.state.upcomingEvents));
     });
   };
@@ -58,7 +58,7 @@ class ControlledExpansionPanels extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === row[0]} onChange={this.handleChange(row[0])}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>{row[1]}</Typography>
+            <Typography className={classes.heading}>{row[2]}</Typography>
             <Typography className={classes.secondaryHeading}>Register</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
