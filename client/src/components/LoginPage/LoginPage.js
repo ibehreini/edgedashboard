@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import GoogleLogin from 'react-google-login';
 
 class LoginPage extends Component {
   constructor () {
@@ -46,12 +46,23 @@ handleSubmit(event) {
     }
   }
 
+  onSuccess=(response) => {
+    console.log(response);
+  }
+
+  onFailure=(response) => {
+    console.log(response);
+  }
 
     render() {
       return (
-        <div>
-          {this.loginForm()}
-        </div>
+        <GoogleLogin
+clientId="95770693193-qjl5187o86chsqd7vuad0avjh4r40u5g.apps.googleusercontent.com"
+buttonText="Login"
+onSuccess={this.onSuccess}
+onFailure={this.onFailure}
+cookiePolicy={'single_host_origin'}
+/>
       );
     }
   }
