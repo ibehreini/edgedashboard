@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api/events', require('./api/events'));
 
+app.use('/api/attendance', require('./api/attendance'));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);

@@ -2,7 +2,7 @@ const db = require('../database');
 
 class events {
   static retrieveAll (callback) {
-    db.query('SELECT title, eventTime from events', (err, res) => {
+    db.query('SELECT * from events', (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
@@ -10,15 +10,23 @@ class events {
   }
 
   static retrieveAllWorkshops (wStr, callback) {
-    db.query('SELECT title, eventTime from events where eventtype = $1 ', [wStr], (err, res) => {
+    db.query('SELECT title, id from events where eventtype = $1 ', [wStr], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
     });
   }
 
-  static insert (title, eventtime, callback) {
-    db.query('INSERT INTO events (title, eventTime) VALUES ($1,$2)', [title], [eventTime], (err, res) => {
+  static retrieveAllEvents (wStr, callback) {
+    db.query('SELECT title, id from events where eventtype = $1 ', [wStr], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
+  }
+
+  static insert (eventtime, eventtype, eventlocation, title, description, callback) {
+    db.query('INSERT INTO events (eventtime, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5)', [eventtime, eventtype, eventlocation, title, description], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);

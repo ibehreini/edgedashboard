@@ -10,7 +10,7 @@ events.retrieveAll((err, events) => {
     return res.json(events);
   });
 
-
+  
 });
 
 router.get('/w', (req, res) => {
@@ -21,11 +21,21 @@ router.get('/w', (req, res) => {
     });
   });
 
-router.post('/', (req, res) => {
-  var event = req.body.event;
-  var evdate = req.body.evdate
+router.get('/e', (req, res) => {
+  events.retrieveAllEvents('event', (err, events) => {
+      if (err)
+        return res.json(err);
+      return res.json(events);
+    });
+  });
 
-  events.insert(event, evdate, (err, result) => {
+router.post('/', (req, res) => {
+  var eventtime = req.body.eventtime;
+  var eventtype = req.body.eventtype;
+  var eventlocation = req.body.eventlocation;
+  var title = req.body.title;
+  var description = req.body.description;
+  events.insert(eventtime, eventtype, eventlocation, title, description, (err, result) => {
     if (err)
       return res.json(err);
     return res.json(result);

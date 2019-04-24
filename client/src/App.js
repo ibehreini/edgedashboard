@@ -9,6 +9,7 @@ import EventPage from './components/StaffPage/Events/EventPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import StudentPage from './components/StudentPage/StudentPage';
 import MentorPage from './components/MentorPage/MentorPage';
+import ManagePage from './components/StaffPage/ManageEvents/ManagePage'
 
 const Login = () => (
   <LoginPage />
@@ -21,6 +22,10 @@ const StaffWorkshopView = () => (
 const StaffEventView = () => (
   <EventPage />
 );
+
+const StaffManagePage = () => (
+	<ManagePage />
+); 
 
 const StaffTimesheetView = () => (
   <TimesheetPage />
@@ -42,6 +47,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/staff/workshops" component={StaffWorkshopView} />
           <Route path="/staff/events" component={StaffEventView} />
+		  <Route path="/staff/manageevents" component={StaffManagePage} />
           <Route path="/staff/timesheets" component={StaffTimesheetView} />
           <Route path="/student" component={Student} />
           <Route path="/mentor" component={Mentor} />

@@ -4,14 +4,14 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import Grid from '@material-ui/core/Grid';
 
-class WorkshopGrid extends Component {
+class EventGrid extends Component {
     constructor(props) {
       super(props);
       this.state = {
         columnDefs: [{
           headerName: "Name", field: "0"
         }, {
-          headerName: "Transport Needs", field: "1"
+          headerName: "Transport Needs", field: "1",
         }, {
           headerName: "Other NOtes", field: "2"
         }],
@@ -20,10 +20,9 @@ class WorkshopGrid extends Component {
     }
 
     getAttendanceRecords = () => {
-      fetch(`http://localhost:5000/api/attendance/time/${this.props.selectedWorkshop}`)
+      fetch(`http://localhost:5000/api/attendance/time/${this.props.selectedEvent}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         var rowData = res.map(r => [r.username, r.transportneeds, r.notes]);
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
@@ -37,17 +36,17 @@ class WorkshopGrid extends Component {
         return (
           <div
             className="ag-theme-fresh"
-            style={{
+            style={{ 
               borderWidth: 0.5,
               vorderColor: '#d6d7da',
               width: '50%',
-              margin: 'auto' }}
+              margin: 'auto' }} 
           >
-            <div
+            <div 
               className="ag-theme-fresh"
-              style={{
-              height: '500px',
-              width: '800px' }}
+              style={{ 
+              height: '500px',    
+              width: '800px' }} 
             >
             {this.getAttendanceRecords()}
               <AgGridReact
@@ -59,5 +58,5 @@ class WorkshopGrid extends Component {
       );
     }
   }
-
-  export default WorkshopGrid;
+  
+  export default EventGrid;

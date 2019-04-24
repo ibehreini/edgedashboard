@@ -21,7 +21,7 @@ class WorkshopPage extends Component {
     fetch(`http://localhost:5000/api/events/W`)
     .then(res => res.json())
     .then(res => {
-      var workshopList = res.map(r => [r.title, r.eventdate]);
+      var workshopList = res.map(r => [r.title, r.id]);
       this.setState({workshopList}, () => console.log(this.state.workshopList));
     });
   };
@@ -42,12 +42,11 @@ class WorkshopPage extends Component {
         <div>
           <select value={this.state.selectedWorkshop} 
               onChange={(e) => this.setState({selectedWorkshop: e.target.value}, () => console.log(this.state)) }>
-            <option>Select workshop</option>
+            <option value="" disabled selected>Select workshop</option>
             {this.state.workshopList.map(r => <option key = {r[0]} value = {r[1]}>{r[0]}</option>)}
-            <option>wanker</option>
           </select>
-          <button>Click Here</button>
           <div>{this.state.selectedWorkshop}</div>
+          {this.state.selectedWorkshop && <WorkshopGrid selectedWorkshop={this.state.selectedWorkshop} />}
         </div>
       </div>
     );
