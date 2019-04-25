@@ -1,12 +1,16 @@
 const db = require('../database');
 
-class events {
-  static retrieveAll (callback) {
-    db.query('SELECT * from events', (err, res) => {
-      if (err.error)
-        return callback(err);
-      callback(res);
-    });
+const querycallback = (err, res) => {
+  if (err.error)
+    return callback(err);
+  callback(res);
+}
+const table = db.queryMaker( 'Events' );
+
+class Events {
+  static retrieveAll (callback)
+  {
+    db.query('SELECT * from events', querycallback );
   }
 
   static retrieveAllWorkshops (wStr, callback) {
@@ -42,4 +46,4 @@ class events {
   }
 }
 
-module.exports = events;
+module.exports = Events;
