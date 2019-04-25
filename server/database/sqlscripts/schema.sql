@@ -25,14 +25,14 @@ CREATE TABLE EventNotes (
 CREATE TYPE Transportation AS ENUM( 'paratransport', 'public', 'pickup' );
 CREATE TABLE Attendance (
   event INTEGER REFERENCES Events,
-  username VARCHAR REFERENCES Login,
+  username VARCHAR REFERENCES Role,
   transportNeeds Transportation,
   notes TEXT,
   PRIMARY KEY (event, username)
 );
 
 CREATE TABLE MentorHours (
-  username VARCHAR REFERENCES Login,
+  username VARCHAR REFERENCES Role,
   period DATE,
   hours INTEGER NOT NULL,
   justification TEXT NOT NULL,
