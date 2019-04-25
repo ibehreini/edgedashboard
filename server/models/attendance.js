@@ -39,6 +39,25 @@ class EventAttendance
                                     'notes': notes } ).toString()
     db.query( qstring, querycallback );
   }
+  /*Gets event details + whether or not this user is attending them*/
+  static retrieveEvents( userKey, callback )
+  {
+    /*Original query:
+      SELECT ( Attendance.event NOTNULL ) AS attending, Events.* FROM Events
+      LEFT JOIN (SELECT Attendance.event FROM Attendance
+                 WHERE username = userKey ) Attendance
+      ON Attendance.event = Events.id;*/
+          //Filter to the current user's attendance records
+    const attendanceTable = table.select( 'event' ).where( 'username', userKey
+                              ).as( 'Attendance' ),
+          //Select boolean record of attending
+          isAttending = db.queryMaker.raw( "Attendance.event" ).havingNotNull(),
+          //All together now
+          qstring = db.queryMaker( 'Events' ).leftJoin( attendanceTable,
+                      'Attendance.event', '=', 'Events.id' ).select(
+                        isAttending, "Events.*" ).toString();
+    db.query( qstring, querycallback );
+  }
 }
 
 module.exports = EventAttendance;
