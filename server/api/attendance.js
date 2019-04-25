@@ -40,19 +40,4 @@ router.post('/attending', (req, res) => {
   });
 });
 
-router.post( '/', (req, res) => {
-  console.log( req );
-  const reqbody = req.body
-  table.insert( reqbody.event,
-                reqbody.user,
-                reqbody.transportation,
-                reqbody.notes,
-                (err, result) => {
-                  if (err)
-                    return res.json(err);
-                  return res.json(result);
-                } );
-  res.send('received POST data: ' + req.body.data );
-} );
-
 module.exports = router ;

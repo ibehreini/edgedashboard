@@ -39,17 +39,6 @@ class EventAttendance
                                     'notes': notes } ).toString()
     db.query( qstring, querycallback );
   }
-
-  static insert( eventKey, userKey, transportation, notes, callback )
-  {
-    const qstring = db.queryMaker( 'Attendance' ).insert(
-                    { eventKey, userKey, transportation, notes } ).toString()
-    db.query( qstring,
-              (err, res) => { if (err.error)
-                                return callback(err);
-                              callback(res);
-                             } )
-  }
 }
 
 module.exports = EventAttendance;
