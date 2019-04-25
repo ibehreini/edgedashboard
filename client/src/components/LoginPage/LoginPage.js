@@ -63,10 +63,10 @@ handleSubmit = (event) => {
       this.props.history.push('/staff/workshops');
     }
     if (this.state.profile[0][1] == 'mentor') {
-      console.log('You are a mentor');
+      this.props.history.push('/mentor');
     }
     if (this.state.profile[0][1] == 'staff') {
-      console.log('You are staff');
+      this.props.history.push('/staff/student');
     }
   }
 
