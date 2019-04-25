@@ -7,6 +7,7 @@ class LoginPage extends Component {
     this.state = {
       username: "",
       password: "",
+      profile: {},
       value: ""
     }  
   this.handleChangedUsername = this.handleChangedUsername.bind(this);
@@ -47,7 +48,15 @@ handleSubmit(event) {
   }
 
   onSuccess=(response) => {
-    console.log(response);
+    // var email = response.map(r => [r.profileobj]);
+    let email = response.profileObj.email
+    // console.log(email);
+    fetch(`http://localhost:5000/api/login/${email}`)
+      .then(res => res.json())
+      .then(res => {
+        var profile = res.map(r => [r.username, r.edgerole]);
+        this.setState({profile}, () => console.log(this.state.profile));
+      });
   }
 
   onFailure=(response) => {

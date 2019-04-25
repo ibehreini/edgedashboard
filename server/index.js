@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 
 app.use('/api/events', require('./api/events'));
 
+app.use('/api/login', require('./api/login'));
+
 app.use('/api/attendance', require('./api/attendance'));
 
 app.listen(PORT, () => {
