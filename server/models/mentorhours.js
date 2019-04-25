@@ -33,15 +33,16 @@ class MentorHours
   static newEntry( userKey, periodDate, hours, justification, notes )
   {
     const qstring = table.insert( {userKey, periodDate, hours, justification,
-                                  notes} ).toString();
+                                   notes} ).toString();
     db.query( qstring, querycallback );
   }
   /*Only put the key-value pairs in the field object if they are one of the
-   * fields to be updated.  If a field that is not in the expected schema is
-   * passed in, an error will be thrown. TODO spec error*/
+   * fields to be updated.*/
   static updateEntry( userKey, periodDate, fields )
   {
-    //TODO
+    fields.username = userKey;
+    fields.period = periodDate;
+    const qstring = table.update( fields ).toString();
     db.query( qstring, querycallback );
   }
 }
