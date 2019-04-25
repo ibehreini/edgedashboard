@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import {withRouter} from 'react-router-dom';
 
 class LoginPage extends Component {
-  constructor () {
+  constructor (props) {
     super()
     this.state = ({
       username: "",
@@ -48,21 +49,24 @@ handleSubmit = (event) => {
     // var email = response.map(r => [r.profileobj]);
     let email = response.profileObj.email
     // console.log(email);
-    fetch(`http://localhost:5000/api/login/${email}`)
+    fetch(`http://localhost:5000/api/role/${email}`)
       .then(res => res.json())
       .then(res => {
-        var profile = res.map(r => [r.username, r.edgerole]);
-        this.setState({profile}, () => console.log(this.state.profile));
+        var profile = res.map(r => [r.email, r.edgerole]);
+        this.setState({profile}, function() {if (this.state.profile.length > 0) {this.checkRole()} else {console.log('Error')}});
       });
-      this.validateUser();
-    };
-
-  validateUser = () => {
-    if (this.state.profile != null) {
-      console.log(this.state.profile[0]);
     }
-    else {
-      console.log(this.state.profile[0].length);
+
+  checkRole = () => {
+    if (this.state.profile[0][1] == 'student') {
+      // return <Redirect to = '/staff/workshops' /> 
+      this.props.history.push('/staff/workshops');
+    }
+    if (this.state.profile[0][1] == 'mentor') {
+      console.log('You are a mentor');
+    }
+    if (this.state.profile[0][1] == 'staff') {
+      console.log('You are staff');
     }
   }
 
@@ -83,4 +87,4 @@ cookiePolicy={'single_host_origin'}
     }
   }
   
-export default LoginPage;
+export default withRouter(LoginPage);

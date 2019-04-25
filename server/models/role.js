@@ -1,22 +1,14 @@
 const db = require('../database');
 
-const querycallback = (err, res) =>
-                          err.error ? callback( err ) : callback( res);
-
-class Role
+class role
 {
-  static role( userKey, callback )
-  {
-    const qstring = db.queryMaker().select().from( 'Role' ).where(
-                      'email', userKey ).toString();
-    db.query( qstring, querycallback );
-  }
-  static addRole( userKey, role, callback )
-  {
-    const qstring = db.queryMaker().insert( {userKey, role} ).into( 'Role'
-                      ).toString();
-    db.query( qstring, querycallback );
+  
+  static checkUser (email, callback) {
+    db.query('SELECT * from role where email = $1 ', [email], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
   }
 }
-
-module.exports = Role;
+module.exports = role;
