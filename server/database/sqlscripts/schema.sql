@@ -1,9 +1,8 @@
 START TRANSACTION;
 
 CREATE TYPE EdgeRole AS ENUM( 'student', 'mentor', 'staff' );
-CREATE TABLE Login (
-  username VARCHAR PRIMARY KEY,
-  loginPassword VARCHAR NOT NULL,
+CREATE TABLE Role (
+  email VARCHAR PRIMARY KEY,
   edgeRole EdgeRole NOT NULL
 );
 
@@ -34,11 +33,11 @@ CREATE TABLE Attendance (
 
 CREATE TABLE MentorHours (
   username VARCHAR REFERENCES Login,
-  loggedOn DATE,
+  period DATE,
   hours INTEGER NOT NULL,
   justification TEXT NOT NULL,
   notes TEXT,
-  PRIMARY KEY( username, loggedOn )
+  PRIMARY KEY( username, period )
 );
 
 COMMIT;
