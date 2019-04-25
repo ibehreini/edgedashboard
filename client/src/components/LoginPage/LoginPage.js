@@ -4,31 +4,28 @@ import GoogleLogin from 'react-google-login';
 class LoginPage extends Component {
   constructor () {
     super()
-    this.state = {
+    this.state = ({
       username: "",
       password: "",
-      profile: {},
+      profile: null,
       value: ""
-    }  
-  this.handleChangedUsername = this.handleChangedUsername.bind(this);
-  this.handleChangedPassword = this.handleChangedPassword.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
+    });  
 }
 
-handleChangedUsername(event) {
+handleChangedUsername=(event) => {
   this.setState({username: event.target.value});
 }
 
-handleChangedPassword(event) {
+handleChangedPassword=(event) => {
   this.setState({password: event.target.value});
 }
 
-handleSubmit(event) {
+handleSubmit = (event) => {
   alert('Username is ' + this.state.username + 'Password is ' + this.state.password);
   event.preventDefault();
 }
 
-   loginForm() {
+   loginForm = () => {
      return (
       <form onSubmit={this.handleSubmit}>
         <div><h2>Login</h2></div>
@@ -38,7 +35,7 @@ handleSubmit(event) {
       </form>
     );
   }
-  handleForm() {
+  handleForm = () => {
     if (document.readyState = "complete"){
     var num = document.getElementById("uname").value;
     var num1 = document.getElementById("pussy").value;
@@ -57,6 +54,16 @@ handleSubmit(event) {
         var profile = res.map(r => [r.username, r.edgerole]);
         this.setState({profile}, () => console.log(this.state.profile));
       });
+      this.validateUser();
+    };
+
+  validateUser = () => {
+    if (this.state.profile != null) {
+      console.log(this.state.profile[0]);
+    }
+    else {
+      console.log(this.state.profile[0].length);
+    }
   }
 
   onFailure=(response) => {
