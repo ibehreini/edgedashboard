@@ -13,20 +13,20 @@ class Events {
     db.query('SELECT * from events', querycallback );
   }
 
-  static retrieveAllWorkshops (wStr, callback) {
-    db.query('SELECT title, id from events where eventtype = $1 ', [wStr], (err, res) => {
-      if (err.error)
-        return callback(err);
-      callback(res);
-    });
+  static retrieveAllWorkshops ( callback) {
+    db.query( 'SELECT title, id from events where eventtype = \'workshop\'',
+              querycallback );
   }
 
   static retrieveAllEvents (wStr, callback) {
-    db.query('SELECT title, id from events where eventtype = $1 ', [wStr], (err, res) => {
-      if (err.error)
-        return callback(err);
-      callback(res);
-    });
+    db.query( 'SELECT title, id from events where eventtype = \'event\'',
+              querycallback);
+  }
+
+  static retrieveNext( toDate, callback )
+  {
+    const qstring = table.select().whereBetween( 'eventtime',
+                      [ db.queryMaker.fn.now(), toDate ] )
   }
 
   static retrieveNextFew (callback) {
@@ -37,12 +37,15 @@ class Events {
     });
   }
 
-  static insert (eventtime, eventtype, eventlocation, title, description, callback) {
-    db.query('INSERT INTO events (eventtime, eventtype, eventlocation, title, description) VALUES ($1, $2, $3, $4, $5)', [eventtime, eventtype, eventlocation, title, description], (err, res) => {
-      if (err.error)
-        return callback(err);
-      callback(res);
-    });
+  static insert( eventtime, eventtype, eventlocation, title, description,
+                 callback )
+  {
+    const qstring = table.insert( { 'eventTime': eventtime,
+                                    'eventType': eventtype,
+                                    'eventLocation': eventlocation,
+                                    'title': title,
+                                    'description': description } ).toString();
+    db.query( qstring, querycallback );
   }
 }
 

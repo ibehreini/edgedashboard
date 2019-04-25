@@ -10,11 +10,11 @@ events.retrieveAll((err, events) => {
     return res.json(events);
   });
 
-  
+
 });
 
 router.get('/w', (req, res) => {
-  events.retrieveAllWorkshops('workshop', (err, events) => {
+  events.retrieveAllWorkshops( (err, events) => {
       if (err)
         return res.json(err);
       return res.json(events);
@@ -28,9 +28,9 @@ router.get('/w', (req, res) => {
         return res.json(events);
       });
     });
-  
+
 router.get('/e', (req, res) => {
-  events.retrieveAllEvents('event', (err, events) => {
+  events.retrieveAllEvents( (err, events) => {
       if (err)
         return res.json(err);
       return res.json(events);
