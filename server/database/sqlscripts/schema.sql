@@ -1,9 +1,8 @@
 START TRANSACTION;
 
 CREATE TYPE EdgeRole AS ENUM( 'student', 'mentor', 'staff' );
-CREATE TABLE Login (
-  username VARCHAR PRIMARY KEY,
-  loginPassword VARCHAR NOT NULL,
+CREATE TABLE Role (
+  email VARCHAR PRIMARY KEY,
   edgeRole EdgeRole NOT NULL
 );
 
@@ -26,19 +25,19 @@ CREATE TABLE EventNotes (
 CREATE TYPE Transportation AS ENUM( 'paratransport', 'public', 'pickup' );
 CREATE TABLE Attendance (
   event INTEGER REFERENCES Events,
-  username VARCHAR REFERENCES Login,
+  username VARCHAR REFERENCES Role,
   transportNeeds Transportation,
   notes TEXT,
   PRIMARY KEY (event, username)
 );
 
 CREATE TABLE MentorHours (
-  username VARCHAR REFERENCES Login,
-  loggedOn DATE,
+  username VARCHAR REFERENCES Role,
+  period DATE,
   hours INTEGER NOT NULL,
   justification TEXT NOT NULL,
   notes TEXT,
-  PRIMARY KEY( username, loggedOn )
+  PRIMARY KEY( username, period )
 );
 
 COMMIT;
