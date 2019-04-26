@@ -62,7 +62,7 @@ class ControlledExpansionPanels extends React.Component {
             <Typography className={classes.secondaryHeading}>Register</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <RegisterPage upcomingEvent ={row}/>
+            <RegisterPage upcomingEvent ={row} email={this.props.email}/>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>

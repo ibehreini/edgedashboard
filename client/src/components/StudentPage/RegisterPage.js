@@ -10,15 +10,15 @@ class RegisterPage extends Component {
       notes: '',
       value: ""
     }  
-  this.handleChangedName = this.handleChangedName.bind(this);
+  // this.handleChangedName = this.handleChangedName.bind(this);
   this.handleChangedNotes = this.handleChangedNotes.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
 }
-
+/*
 handleChangedName(event) {
   this.setState({name: event.target.value});
 }
-
+*/
 handleChangedNotes(event) {
   this.setState({notes: event.target.value});
 }
@@ -26,7 +26,7 @@ handleChangedNotes(event) {
 handleSubmit(event) {
   let submission = {}
   submission['event'] = this.props.upcomingEvent[0]
-  submission['username'] = this.state.name
+  submission['username'] = this.props.email
   submission['transportneeds'] = this.state.selectedTransport
   submission['notes'] = this.state.notes
   console.log(submission);
@@ -45,7 +45,7 @@ handleSubmit(event) {
      return (
       <form onSubmit={this.handleSubmit}>
         <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
-        <div><label>Name<input type="text" value={this.state.name} onChange={this.handleChangedName}></input></label></div>
+        <div>Name: {this.props.email}</div>
         <div><label>How are you getting to / from the event?
         <select value={this.state.selectedTransport} 
               onChange={(e) => this.setState({selectedTransport: e.target.value}, () => console.log(this.state)) }>

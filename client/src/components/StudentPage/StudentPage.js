@@ -8,7 +8,7 @@ class StudentPage extends Component {
       <div className="StudentPage">
         <h2>Sign up for Upcoming Events/Workshops</h2>
         {this.props.email}
-        <ControlledExpansionPanels />
+        <ControlledExpansionPanels email={this.props.email} />
       </div>
     );
   }

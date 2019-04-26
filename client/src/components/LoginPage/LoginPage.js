@@ -53,6 +53,7 @@ handleSubmit = (event) => {
       .then(res => res.json())
       .then(res => {
         var profile = res.map(r => [r.email, r.edgerole]);
+        // localStorage.setItem( 'myProfile', profile );
         this.setState({profile}, function() {if (this.state.profile.length > 0) {this.checkRole()} else {console.log('Error')}});
       });
     }
