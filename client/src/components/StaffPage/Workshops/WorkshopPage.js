@@ -39,6 +39,7 @@ class WorkshopPage extends Component {
       <div className="StaffPage">
         <NavBar />
         <h2>Workshop Data</h2>
+        {this.props.email}
         <div>
           <select value={this.state.selectedWorkshop} 
               onChange={(e) => this.setState({selectedWorkshop: e.target.value}, () => console.log(this.state)) }>

@@ -45,17 +45,43 @@ const Mentor = () => (
 );
 
 class App extends Component {
+  constructor (props) {
+    super()
+    this.state = ({
+      email: '',
+      role: '',
+      isLoggedIn: false
+    });  
+}
+
+
+  authentication = (profile) => {
+    if (profile != null) {
+    this.setState({email: profile[0][0]}, function() {console.log('blah')} );
+    this.setState({role: profile[0][1]}, function() {console.log('blah')} );
+    this.setState({isLoggedIn: true}, function() {console.log('blah')} );
+  }
+  else {
+    console.log('error: profile must have been empty');
+  }
+  } 
+
   render() {
+    if (this.state.isLoggedIn == false) {
+      return (
+      <Router>          
+        <Route path="/" render={ () => (<LoginPage authentication={this.authentication} />)}/>
+      </Router>)
+    }
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={Login} />
-          <Route path="/staff/workshops" component={StaffWorkshopView} />
+          <Route path="/staff/workshops" render={ () => (<WorkshopPage email={this.state.email} />)}/>
           <Route path="/staff/events" component={StaffEventView} />
-		  <Route path="/staff/manageevents" component={StaffManagePage} />
+		      <Route path="/staff/manageevents" component={StaffManagePage} />
           <Route path="/staff/timesheets" component={StaffTimesheetView} />
           <Route path="/staff/members" component={StaffMembers} />
-          <Route path="/student" component={Student} />
+          <Route path="/student" render={ () => (<StudentPage email={this.state.email} />)}/>
           <Route path="/mentor" component={Mentor} />
         </div>
       </Router>

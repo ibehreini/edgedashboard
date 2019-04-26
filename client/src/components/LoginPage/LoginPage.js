@@ -58,9 +58,9 @@ handleSubmit = (event) => {
     }
 
   checkRole = () => {
+    this.props.authentication(this.state.profile)
     if (this.state.profile[0][1] == 'student') {
-      // return <Redirect to = '/staff/workshops' /> 
-      this.props.history.push('/staff/workshops');
+      this.props.history.push('/student');
     }
     if (this.state.profile[0][1] == 'mentor') {
       this.props.history.push('/mentor');

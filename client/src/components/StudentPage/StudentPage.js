@@ -7,6 +7,7 @@ class StudentPage extends Component {
     return (
       <div className="StudentPage">
         <h2>Sign up for Upcoming Events/Workshops</h2>
+        {this.props.email}
         <ControlledExpansionPanels />
       </div>
     );
