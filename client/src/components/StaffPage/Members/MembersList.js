@@ -9,19 +9,32 @@ class MembersList extends Component {
       super(props);
       this.state = {
         columnDefs: [{
-          headerName: "Email", field: "0"
+          headerName: "Check", field: "0", checkboxSelection: true
         }, {
-          headerName: "Role", field: "1"
+            headerName: "EMail", field: "email", editable: true
+          }, {
+          headerName: "Role", field: "edgerole", editable: true
         }],
         rowData: []
       }
     }
+    onGridReady = params => {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+      };
 
     getAllUsers = () => {
       fetch(`http://localhost:5000/api/role/`)
       .then(res => res.json())
       .then(res => {
-        var rowData = res.map(r => [r.email, r.edgerole]);
+        var myData = res.map(r => [r.email, r.edgerole]);
+        let rowData = []
+        myData.forEach(row=>{
+          let ev = {}
+          ev['email'] = row[0]
+        ev['edgerole'] = row[1]
+        rowData.push(ev);
+        })
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
     };
