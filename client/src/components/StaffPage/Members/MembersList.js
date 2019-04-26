@@ -43,6 +43,13 @@ class MembersList extends Component {
      this.getAllUsers();
    }
 
+   addRow() {
+    let myArr = [];
+    const newItems = {email: 'Enter a google email', edgerole: 'Enter role'};
+    myArr.push(newItems);
+    var res = this.gridApi.updateRowData({ add: myArr });
+  }
+
     render() {
         return (
           <div
@@ -60,7 +67,10 @@ class MembersList extends Component {
               width: '800px' }} 
             >
             {this.getAllUsers()}
+            <button onClick={this.addRow.bind(this)}>Add Row</button>
               <AgGridReact
+                rowSelection="multiple"
+                onGridReady={ params => this.gridApi = params.api }
                 columnDefs={this.state.columnDefs}
                 rowData={this.state.rowData}>
               </AgGridReact>
