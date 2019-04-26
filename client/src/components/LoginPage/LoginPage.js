@@ -59,7 +59,6 @@ handleSubmit = (event) => {
     }
 
   checkRole = () => {
-    this.props.authentication(this.state.profile)
     if (this.state.profile[0][1] == 'student') {
       this.props.history.push('/student');
     }
@@ -67,8 +66,9 @@ handleSubmit = (event) => {
       this.props.history.push('/mentor');
     }
     if (this.state.profile[0][1] == 'staff') {
-      this.props.history.push('/staff/student');
+      this.props.history.push('/staff/workshops');
     }
+    this.props.authentication(this.state.profile)
   }
 
   onFailure=(response) => {
