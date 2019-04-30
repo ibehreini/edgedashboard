@@ -3,18 +3,6 @@ import NavBar from '../../NavBar/NavBar';
 import MembersList from '../Members/MembersList';
 
 class Members extends Component {
-  constructor () {
-    super()
-    this.state = {
-      isHidden: true
-    }
-  }
-  toggleHidden () {
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
-  }
-
   render() {
     return (
       <div className="StaffPage">

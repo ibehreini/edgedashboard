@@ -11,22 +11,20 @@ class RegisterPage extends Component {
       value: ""
     }  
   // this.handleChangedName = this.handleChangedName.bind(this);
-  this.handleChangedNotes = this.handleChangedNotes.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
 }
 /*
 handleChangedName(event) {
   this.setState({name: event.target.value});
 }
 */
-handleChangedNotes(event) {
+handleChangedNotes = (event) => {
   this.setState({notes: event.target.value});
 }
 
-handleSubmit(event) {
+handleSubmit = (event) => {
   let submission = {}
   submission['event'] = this.props.upcomingEvent[0]
-  submission['username'] = this.props.email
+  submission['username'] = localStorage.getItem('email')
   submission['transportneeds'] = this.state.selectedTransport
   submission['notes'] = this.state.notes
   console.log(submission);
@@ -41,12 +39,12 @@ handleSubmit(event) {
   event.preventDefault();
 }
 
-   loginForm() {
+   loginForm = () => {
      return (
       <form onSubmit={this.handleSubmit}>
         <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
-        <div>Name: {this.props.email}</div>
-        <div><label>How are you getting to / from the event?
+        <div>Name: {localStorage.getItem('email')}</div>
+        <div><label>Form of transportation
         <select value={this.state.selectedTransport} 
               onChange={(e) => this.setState({selectedTransport: e.target.value}, () => console.log(this.state)) }>
             <option value="" disabled selected>Select Method of Transport</option>
@@ -67,6 +65,10 @@ handleSubmit(event) {
     console.log(num);
     console.log(num1);
     }
+  }
+
+  chooseForm = () => {
+    
   }
 
 

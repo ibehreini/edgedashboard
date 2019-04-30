@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import { GoogleLogout } from 'react-google-login';
 
 const styles = {
   list: {
@@ -20,7 +21,17 @@ const styles = {
 class NavBar extends React.Component {
   state = {
     left: false,
+    cat: ''
   };
+
+  logout = () => {
+    localStorage.setItem('isLoggedIn', 'false');
+    console.log("here", localStorage.getItem("isLoggedIn"))
+    console.log('cunt');
+    window.location.reload();
+    // this.forceUpdate()
+    // this.props.history.push('/');
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -66,6 +77,14 @@ class NavBar extends React.Component {
                   <ListItem button key='members'>
                     <ListItemText primary='Manage Enrollment' />
                   </ListItem>
+                </Link>
+                <Link to="/">
+                <GoogleLogout
+      buttonText="Logout"
+      onLogoutSuccess={()=>this.logout()}
+      redirectUri="/"
+    >
+    </GoogleLogout>
                 </Link>
               </List>
             </div>

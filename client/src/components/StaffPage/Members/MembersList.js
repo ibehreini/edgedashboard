@@ -50,6 +50,11 @@ class MembersList extends Component {
     var res = this.gridApi.updateRowData({ add: myArr });
   }
 
+  removeRow = () => {
+    const selectedNodes = this.gridApi.getSelectedNodes()
+    console.log(selectedNodes);
+  }
+
     render() {
         return (
           <div
@@ -66,8 +71,9 @@ class MembersList extends Component {
               height: '500px',    
               width: '800px' }} 
             >
-            {this.getAllUsers()}
+            // {this.getAllUsers()}
             <button onClick={this.addRow.bind(this)}>Add Row</button>
+            <button onClick={this.removeRow}>Add Row</button>
               <AgGridReact
                 rowSelection="multiple"
                 onGridReady={ params => this.gridApi = params.api }

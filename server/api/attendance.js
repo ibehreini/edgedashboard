@@ -28,6 +28,17 @@ attendance.retrieveAttending(event, (err, attendance) => {
   });
 });
 
+router.get('/status/:event/:username', (req, res) => {
+  var event = req.params.event;
+  var username = req.params.username;
+attendance.checkSignUpStatus(event, username, (err, attendance) => {
+    if (err)
+      return res.json(err);
+    return res.json(attendance);
+  });
+});
+
+
 router.post('/attending', (req, res) => {
   var event = req.body.event;
   var username = req.body.username;

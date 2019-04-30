@@ -27,6 +27,15 @@ class EventAttendance
     });
   }
 
+  static checkSignUpStatus (event, username, callback) {
+    db.query('SELECT * from attendance where event = $1 and username = $2', [event], [username], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
+  }
+
+
   static insertAttending (event, username, transportneeds, notes, callback) {
     db.query('INSERT INTO attendance (event, username, transportneeds, notes) VALUES ($1, $2, $3, $4)', [event, username, transportneeds, notes], (err, res) => {
       if (err.error)

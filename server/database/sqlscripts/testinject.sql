@@ -4,9 +4,9 @@
 
  START TRANSACTION;
 
- INSERT INTO Role VALUES ( 'evie@evie.com', 'staff'  ),
-                         ( 'potato@vgg.com', 'student' ),
-                         ( 'veggies@vgg.com', 'mentor' );
+ INSERT INTO Role VALUES ( 'behreini.ida@egmail.com', 'staff'  ),
+                         ( 'ibehreini@drew.edu', 'student' ),
+                         ( 'andrewrupkey@gmail.com', 'mentor' );
 
 INSERT INTO Events (title, eventTime, eventType, eventLocation, description) VALUES
   ( 'Evie Care', '2019-03-14 14:00:00', 'workshop', 'Evie',
@@ -29,12 +29,12 @@ INSERT INTO EventNotes VALUES
     'prosthetics.' );
 
 INSERT INTO Attendance VALUES
-  ( (SELECT id FROM Events WHERE title = 'Evie Care'), 'potato@vgg.com', 'pickup', NULL ),
-  ( (SELECT id FROM Events WHERE title = 'Shopping'), 'potato@vgg.com', 'public', NULL );
+  ( (SELECT id FROM Events WHERE title = 'Evie Care'), 'ibehreini@drew.edu', 'pickup', NULL ),
+  ( (SELECT id FROM Events WHERE title = 'Shopping'), 'ibehreini@drew.edu', 'public', NULL );
 
-INSERT INTO MentorHours VALUES ( 'veggies@vgg.com', '2019-01-22', 6,
+INSERT INTO MentorHours VALUES ( 'andrewrupkey@gmail.com', '2019-01-22', 6,
   'Potato & I walked around his house and worked on not bumping into things.',
   'Potato''s navigational skills really seem to be improving, despite the '
-  'number of times we barked our shins on the coffe table.' );
+  'number of times we banged our shins on the coffe table.' );
 
 COMMIT;
