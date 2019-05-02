@@ -48,8 +48,6 @@ class App extends Component {
   constructor (props) {
     super()
     this.state = ({
-      email: '',
-      role: '',
       isLoggedIn: false
     });  
 }
@@ -57,12 +55,9 @@ class App extends Component {
 
   authentication = (profile) => {
     if (profile != null) {
-    this.setState({email: profile[0][0]}, function() {console.log('blah')} );
-    this.setState({role: profile[0][1]}, function() {console.log('blah')} );
     this.setState({isLoggedIn: true}, function() {console.log('blah')} );
     localStorage.setItem( 'isLoggedIn', true);
     localStorage.setItem( 'email', profile[0][0]);
-    console.log("profile: ", profile)
     localStorage.setItem( 'role', profile[0][1]);
   }
   else {
@@ -70,27 +65,36 @@ class App extends Component {
   }
   } 
 
+/*
+  componentDidMount = () => {
+    if (localStorage.getItem("isLoggedIn") === null) {
+      localStorage.setItem("isLoggedIn", "false");
+      localStorage.setItem("role", null);
+      localStorage.setItem("email", null);
+      this.forceUpdate();
+    }
+  };*/
+
   render() {
-    console.log("isloggedin ", localStorage.getItem("isLoggedIn"))
-    // localStorage.setItem("isLoggedIn", false)
-    console.log("role: ", localStorage.getItem("role"))
-    console.log("email: ", localStorage.getItem("email"))
-    if (localStorage.getItem('isLoggedIn') == "false") {
+    console.log(localStorage.getItem('isLoggedIn'));
+    console.log('MUAHA');
+    if (localStorage.getItem('isLoggedIn') === "false") {
       return (
       <Router>         
         <Route path="/" render={ () => (<LoginPage authentication={this.authentication} />)}/>
       </Router>)
     }
-    if (localStorage.getItem('role') == 'student' && localStorage.getItem('isLoggedIn') == 'true') {
+    if (localStorage.getItem('role') === 'student' && localStorage.getItem('isLoggedIn') === 'true') {
+      // localStorage.setItem('isLoggedIn', false);
       return (
         <Router>
-          <div className="App">
-            <Route path="/student" render={ () => (<StudentPage email={this.state.email} />)}/>
+          <div className="AppStu">
+            <Route path="/student" component={Student} />
           </div>
         </Router>
       );
     }
-    if (localStorage.getItem('role') == 'mentor' && localStorage.getItem('isLoggedIn') == 'true') {
+    if (localStorage.getItem('role') === 'mentor' && localStorage.getItem('isLoggedIn') === 'true') {
       return (
         <Router>
           <div className="App">
@@ -112,7 +116,9 @@ class App extends Component {
             </Router>
       )}  
       return (
-        <p>Hi</p>
+        <Router>         
+        <Route path="/" render={ () => (<LoginPage authentication={this.authentication} />)}/>
+      </Router>
       )
     }
   }
