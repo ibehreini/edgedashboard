@@ -2,7 +2,8 @@
   "name": "evieapp",
   "version": "1.0.0",
   "engines": {
-    "node": "10.15.3"
+    "node": "10.15.3",
+    "npm": "6.x"
   },
   "description": "a dashboard for edge",
   "main": "index.js",
@@ -11,7 +12,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
     "start": "node server",
-    "herok-postbuild": "cd client && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "build": "",
     "test": "react-scripts test --env=jsdom",
     "predeploy": "REACT_APP_STAGE=dev npm run build",
