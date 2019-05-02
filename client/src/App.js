@@ -77,7 +77,7 @@ class App extends Component {
 
   render() {
     console.log(localStorage.getItem('isLoggedIn'));
-    console.log('MUAHA');
+    console.log(localStorage.getItem('role'));
     if (localStorage.getItem('isLoggedIn') === "false") {
       return (
       <Router>         
@@ -103,7 +103,7 @@ class App extends Component {
         </Router>
       );
     }
-    if (localStorage.getItem('role') == 'staff' && localStorage.getItem('isLoggedIn') == 'true') {
+    if (localStorage.getItem('role') === 'staff' && localStorage.getItem('isLoggedIn') === 'true') {
       return (
         <Router>
           <div className="App">

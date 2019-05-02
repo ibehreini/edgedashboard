@@ -80,6 +80,7 @@ class NavBar extends React.Component {
                 </Link>
                 <Link to="/">
                 <GoogleLogout
+                clientId="95770693193-qjl5187o86chsqd7vuad0avjh4r40u5g.apps.googleusercontent.com"
       buttonText="Logout"
       onLogoutSuccess={()=>this.logout()}
       redirectUri="/"
