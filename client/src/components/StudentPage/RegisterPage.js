@@ -8,7 +8,8 @@ class RegisterPage extends Component {
       name: "",
       selectedTransport: "",
       notes: '',
-      value: ""
+      value: "",
+      regData: []
     }  
   // this.handleChangedName = this.handleChangedName.bind(this);
 }
@@ -40,13 +41,23 @@ handleSubmit = (event) => {
 }
 
 componentDidMount = () => {
-  fetch(`http://localhost:5000/api/attendance/status/${this.props.upcomingEvent[0]}/${localStorage.getItem('email')}`)
+  fetch(`http://localhost:5000/api/attendance/status/${localStorage.getItem('email')}`)
       .then(res => res.json())
       .then(res => {
         var myData = res.map(r => [r.event, r.username, r.transportneeds, r.notes]);
-        let rowData = []
-        console.log(rowData);
-        this.setState({rowData}, () => console.log(this.state.rowData));
+        let regData = []
+        myData.forEach(row=>{
+          let ev = {}
+          ev['event'] = row[0]
+          ev['username'] = row[1]
+        ev['transportneeds'] = row[2]
+        ev['notes'] = row[3]
+        if (ev.event === this.props.upcomingEvent[0]) {
+        regData.push(ev);
+          }
+        })
+        console.log(regData);
+        this.setState({regData}, () => console.log(this.state.regData));
       });
 }
 
@@ -55,7 +66,7 @@ componentDidMount = () => {
       <form onSubmit={this.handleSubmit}>
         <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
         <div>Name: {localStorage.getItem('email')}</div>
-        <div><label>Form of transportation
+        <div><label>Form of transportation {this.state.regData.transportneeds}
         <select value={this.state.selectedTransport} 
               onChange={(e) => this.setState({selectedTransport: e.target.value}, () => console.log(this.state)) }>
             <option value="" disabled selected>Select Method of Transport</option>
