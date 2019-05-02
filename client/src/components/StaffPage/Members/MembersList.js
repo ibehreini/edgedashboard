@@ -45,14 +45,27 @@ class MembersList extends Component {
 
    addRow() {
     let myArr = [];
-    const newItems = {email: 'Enter a google email', edgerole: 'Enter role'};
+    const newItems = {id: 'null', email: 'Enter a google email', edgerole: 'Enter role'};
     myArr.push(newItems);
     var res = this.gridApi.updateRowData({ add: myArr });
   }
 
-  removeRow = () => {
+  saveRow = () => {
     const selectedNodes = this.gridApi.getSelectedNodes()
-    console.log(selectedNodes);
+      const rowData = selectedNodes.map( node => node.data )
+      rowData.forEach(row=>{
+        let evie = {}
+        evie['email'] = row.email
+        evie['edgerole'] = row.edgerole
+        if (row.id === null) {
+        console.log('if id is null');
+        console.log(evie);
+      }
+      else {
+        console.log('ELSE STATEMENT');
+        console.log(evie);
+      }
+      })
   }
 
     render() {
@@ -73,7 +86,7 @@ class MembersList extends Component {
             >
             // {this.getAllUsers()}
             <button onClick={this.addRow.bind(this)}>Add Row</button>
-            <button onClick={this.removeRow}>Add Row</button>
+            <button onClick={this.saveRow}>Save</button>
               <AgGridReact
                 rowSelection="multiple"
                 onGridReady={ params => this.gridApi = params.api }

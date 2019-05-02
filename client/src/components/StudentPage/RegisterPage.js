@@ -7,9 +7,9 @@ class RegisterPage extends Component {
     this.state = {
       name: "",
       selectedTransport: "",
-      notes: '',
-      value: "",
-      regData: []
+        notes: '',
+        value: "",
+        regData: []
     }  
   // this.handleChangedName = this.handleChangedName.bind(this);
 }
