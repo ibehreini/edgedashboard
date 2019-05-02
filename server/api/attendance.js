@@ -11,14 +11,6 @@ attendance.retrieveAll((err, attendance) => {
   });
 });
 
-router.get( '/:user', (req, res) => {
-  table.attendingIds( req.params.user, (err, events) => {
-      if (err)
-        return res.json(err);
-      return res.json(events);
-    });
-});
-
 router.get('/time/:event', (req, res) => {
 	var event = req.params.event;
 attendance.retrieveAttending(event, (err, attendance) => {
@@ -28,10 +20,9 @@ attendance.retrieveAttending(event, (err, attendance) => {
   });
 });
 
-router.get('/status/:event/:username', (req, res) => {
-  var event = req.params.event;
+router.get('/status/:username', (req, res) => {
   var username = req.params.username;
-attendance.checkSignUpStatus(event, username, (err, attendance) => {
+attendance.checkSignUpStatus(username, (err, attendance) => {
     if (err)
       return res.json(err);
     return res.json(attendance);

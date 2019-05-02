@@ -27,8 +27,8 @@ class EventAttendance
     });
   }
 
-  static checkSignUpStatus (event, username, callback) {
-    db.query('SELECT * from attendance where event = $1 and username = $2', [event], [username], (err, res) => {
+  static checkSignUpStatus (username, callback) {
+    db.query('SELECT * from attendance where username = $1', [username], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);

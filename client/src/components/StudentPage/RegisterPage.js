@@ -39,7 +39,18 @@ handleSubmit = (event) => {
   event.preventDefault();
 }
 
-   loginForm = () => {
+componentDidMount = () => {
+  fetch(`http://localhost:5000/api/attendance/status/${this.props.upcomingEvent[0]}/${localStorage.getItem('email')}`)
+      .then(res => res.json())
+      .then(res => {
+        var myData = res.map(r => [r.event, r.username, r.transportneeds, r.notes]);
+        let rowData = []
+        console.log(rowData);
+        this.setState({rowData}, () => console.log(this.state.rowData));
+      });
+}
+
+   registerForm = () => {
      return (
       <form onSubmit={this.handleSubmit}>
         <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
@@ -75,7 +86,7 @@ handleSubmit = (event) => {
     render() {
       return (
         <div>
-          {this.loginForm()}
+          {this.registerForm()}
         </div>
       );
     }
