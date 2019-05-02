@@ -50,4 +50,18 @@ router.post('/', (req, res) => {
   });
 });
 
+router.post('/u', (req, res) => {
+  var id = req.body.id;
+  var eventtime = req.body.eventtime;
+  var eventtype = req.body.eventtype;
+  var eventlocation = req.body.eventlocation;
+  var title = req.body.title;
+  var description = req.body.description;
+  events.update(id, eventtime, eventtype, eventlocation, title, description, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
+
 module.exports = router;
