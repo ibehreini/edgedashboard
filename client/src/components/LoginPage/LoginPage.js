@@ -49,7 +49,7 @@ handleSubmit = (event) => {
     // var email = response.map(r => [r.profileobj]);
     let email = response.profileObj.email
     // console.log(email);
-    fetch(`http://localhost:5000/api/role/${email}`)
+    fetch(`/api/role/${email}`)
       .then(res => res.json())
       .then(res => {
         var profile = res.map(r => [r.email, r.edgerole]);
