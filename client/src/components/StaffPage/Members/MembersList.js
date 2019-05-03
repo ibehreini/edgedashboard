@@ -94,34 +94,29 @@ class MembersList extends Component {
       const rowData = selectedNodes.map( node => node.data )
       rowData.forEach(row=>{
         console.log(row.email);
-    fetch(`http://localhost:5000/api/role/d/${row.email}`, {
-              method: 'DELETE',
+    // fetch(`http://localhost:5000/api/role/d/${row.email}`, {
+       //        method: 'DELETE',
               // headers: { 'Content-Type': 'application/json' },
               // body: JSON.stringify(row.email)
-            })
-            .then(res => {
-              console.log(res);
-              this.getAllUsers();
-            }); 
+          //   })
+          //   .then(res => {
+          //     console.log(res);
+           //    this.getAllUsers();
+           //  }); 
             // const requestOptions = {
             //   method: 'DELETE',
            //    body: row
             //  };
             fetch("http://localhost:5000/api/role/d/" + row.email, {
-              headers: {
-                "Access-Control-Allow-Credentials": true,
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json"
-              },
               method: "DELETE",
               body: row
             })
             .then(res => res.json())
             .then(json => {
                 console.log('hi');
+                this.getAllUsers();
               });
             });
-          
   }
 
     render() {

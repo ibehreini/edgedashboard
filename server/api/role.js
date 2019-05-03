@@ -43,8 +43,10 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/d/:email', (req, res) => {
-  var email = req.body.email;
+  var email = req.params.email;
+  console.log(email);
   role.delete(email, (err, result) => {
+    console.log(email);
     if (err)
       return res.json(err);
     return res.json(result);
