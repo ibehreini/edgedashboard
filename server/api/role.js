@@ -42,6 +42,19 @@ router.post('/', (req, res) => {
   });
 });
 
+router.post('/hours', (req, res) => {
+  var username = req.body.username;
+  var period = req.body.period;
+  var hours = req.body.hours;
+  var justification = req.body.justification;
+  var notes = req.body.notes;
+  mentorhours.insertHours(username, period, hours, justification, notes, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
+
 router.delete('/d/:email', (req, res) => {
   var email = req.params.email;
   console.log(email);

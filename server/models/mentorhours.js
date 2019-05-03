@@ -1,48 +1,21 @@
 const db = require('../database');
 
-const querycallback = (err, res) =>
-                          err.error ? callback( err ) : callback( res);
-const table = db.queryMaker( 'MentorHours' );
-
-class MentorHours
+class mentorhours
 {
-  /*This is probably not what any user wants to see, as it is not filtered by
-   *date at all, but is provided here just in case.*/
-  static retrieveAll( callback )
-  {
-    const qstring = table.select();
-    db.query( qstring, querycallback );
+  static retrieveAll (callback) {
+    db.query('SELECT * from mentorhours', (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
   }
-  static retrievePeriod( periodDate, callback )
-  {
-    const qstring = table.select().where( 'period', periodDate ).toString();
-    db.query( qstring, querycallback );
-  }
-  static retrievePeriodRange( fromDate, toDate, callback )
-  {
-    const qstring = table.select().whereBetween( 'period', [fromDate, toDate]
-                        ).toString();
-    db.query( qstring, querycallback );
-  }
-  static retrieveByMentor( userKey, fromDate, toDate, callback )
-  {
-    const qstring = table.select().whereBetween( 'period', [fromDate, toDate]
-                      ).andWhere( 'username', userKey ).toString();
-    db.query( qstring, querycallback );
-  }
-  static newEntry( userKey, periodDate, hours, justification, notes )
-  {
-    const qstring = table.insert( {userKey, periodDate, hours, justification,
-                                   notes} ).toString();
-    db.query( qstring, querycallback );
-  }
-  /*Only put the key-value pairs in the field object if they are one of the
-   * fields to be updated.*/
-  static updateEntry( userKey, periodDate, fields )
-  {
-    fields.username = userKey;
-    fields.period = periodDate;
-    const qstring = table.update( fields ).toString();
-    db.query( qstring, querycallback );
+
+  static insertHours (username, period, hours, justification, notes, callback) {
+    db.query('INSERT INTO mentorhours (username, period, hours, justification, notes) VALUES ($1, $2, $3, $4, $5)', [username, period, hours, justification, notes], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
   }
 }
+module.exports = mentorhours;

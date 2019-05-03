@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 
 app.use('/api/events', require('./api/events'));
 
+app.use('/api/mentorhours', require('./api/mentorhours'));
+
 app.use('/api/role', require('./api/role'));
 
 app.use('/api/attendance', require('./api/attendance'));
