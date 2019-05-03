@@ -57,14 +57,21 @@ class MembersList extends Component {
         let evie = {}
         evie['email'] = row.email
         evie['edgerole'] = row.edgerole
-        if (row.id === null) {
-        console.log('if id is null');
-        console.log(evie);
-      }
-      else {
-        console.log('ELSE STATEMENT');
-        console.log(evie);
-      }
+        fetch(`http://localhost:5000/api/role/check/${row.email}`)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          /*
+          var myData = res.map(r => [r.email, r.edgerole]);
+          let rowData = []
+          myData.forEach(row=>{
+            let ev = {}
+            ev['email'] = row[0]
+          ev['edgerole'] = row[1]
+          rowData.push(ev);
+          })
+          this.setState({rowData}, () => console.log(this.state.rowData)); */
+        });
       })
   }
 

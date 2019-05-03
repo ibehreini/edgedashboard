@@ -2,8 +2,7 @@ START TRANSACTION;
 
 CREATE TYPE EdgeRole AS ENUM( 'student', 'mentor', 'staff' );
 CREATE TABLE Role (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR NOT NULL,
+  email VARCHAR PRIMARY KEY,
   edgeRole EdgeRole NOT NULL
 );
 
