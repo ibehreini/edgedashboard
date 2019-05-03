@@ -5,13 +5,25 @@ class TimesheetPage extends Component {
   constructor () {
     super()
     this.state = {
-      isHidden: true
+      timesheets: ''
     }
   }
-  toggleHidden () {
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
+
+  componentDidMount = () => {
+    this.getTimesheets();
+  }
+
+  getTimesheets = () => {
+    fetch(`http://localhost:5000/api/mentorhours/`)
+      .then(res => res.json())
+      .then(res => {
+        var timesheets = res.map(r => [r.username, r.hours, r.period, r.justification, r.notes]);
+        this.setState({timesheets}, () => this.formatData());
+      });
+  }
+
+  formatData = () => {
+    return (<div><h2>HIyaaa</h2></div>)
   }
 
   render() {
