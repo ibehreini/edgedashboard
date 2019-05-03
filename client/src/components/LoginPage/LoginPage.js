@@ -49,7 +49,7 @@ handleSubmit = (event) => {
     // var email = response.map(r => [r.profileobj]);
     let email = response.profileObj.email
     // console.log(email);
-    fetch(`/api/role/${email}`)
+    fetch(`http://localhost:5000/api/role/${email}`)
       .then(res => res.json())
       .then(res => {
         var profile = res.map(r => [r.email, r.edgerole]);
@@ -77,13 +77,14 @@ handleSubmit = (event) => {
 
     render() {
       return (
+        <div><h2>Welcome to the EDGE Dashboard. Please log in</h2>
         <GoogleLogin
-clientId="65841114402-dlhiqtfi2u8vj4gomcindof4js0egff5.apps.googleusercontent.com"
+clientId="95770693193-qjl5187o86chsqd7vuad0avjh4r40u5g.apps.googleusercontent.com"
 buttonText="Login"
 onSuccess={this.onSuccess}
 onFailure={this.onFailure}
 cookiePolicy={'single_host_origin'}
-/>
+/> </div>
       );
     }
   }

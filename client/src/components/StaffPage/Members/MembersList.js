@@ -35,6 +35,7 @@ class MembersList extends Component {
         ev['edgerole'] = row[1]
         rowData.push(ev);
         })
+        console.log(rowData);
         this.setState({rowData}, () => console.log(this.state.rowData));
       });
     };
@@ -45,7 +46,7 @@ class MembersList extends Component {
 
    addRow() {
     let myArr = [];
-    const newItems = {id: 'null', email: 'Enter a google email', edgerole: 'Enter role'};
+    const newItems = {email: 'Enter a google email', edgerole: 'Enter role'};
     myArr.push(newItems);
     var res = this.gridApi.updateRowData({ add: myArr });
   }
@@ -60,19 +61,67 @@ class MembersList extends Component {
         fetch(`http://localhost:5000/api/role/check/${row.email}`)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
-          /*
-          var myData = res.map(r => [r.email, r.edgerole]);
-          let rowData = []
-          myData.forEach(row=>{
-            let ev = {}
-            ev['email'] = row[0]
-          ev['edgerole'] = row[1]
-          rowData.push(ev);
-          })
-          this.setState({rowData}, () => console.log(this.state.rowData)); */
+          var myData = res.map(r => [r.count]);
+          console.log(myData[0]);
+          if (myData[0][0] === '0') {
+            fetch('http://localhost:5000/api/role/', {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(evie)
+            })
+            .then(res => {
+              console.log(res);
+              this.getAllUsers();
+            });
+          }
+          else {
+            fetch('http://localhost:5000/api/role/u', {
+              method: 'post',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(evie)
+            })
+            .then(res => {
+              console.log(res);
+              this.getAllUsers();
+            });
+          }
         });
       })
+  }
+
+  removeRow = () => {
+    const selectedNodes = this.gridApi.getSelectedNodes()
+      const rowData = selectedNodes.map( node => node.data )
+      rowData.forEach(row=>{
+        console.log(row.email);
+    fetch(`http://localhost:5000/api/role/d/${row.email}`, {
+              method: 'DELETE',
+              // headers: { 'Content-Type': 'application/json' },
+              // body: JSON.stringify(row.email)
+            })
+            .then(res => {
+              console.log(res);
+              this.getAllUsers();
+            }); 
+            // const requestOptions = {
+            //   method: 'DELETE',
+           //    body: row
+            //  };
+            fetch("http://localhost:5000/api/role/d/" + row.email, {
+              headers: {
+                "Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json"
+              },
+              method: "DELETE",
+              body: row
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log('hi');
+              });
+            });
+          
   }
 
     render() {
@@ -81,7 +130,7 @@ class MembersList extends Component {
             className="ag-theme-fresh"
             style={{ 
               borderWidth: 0.5,
-              vorderColor: '#d6d7da',
+              borderColor: '#d6d7da',
               width: '50%',
               margin: 'auto' }} 
           >
@@ -91,9 +140,9 @@ class MembersList extends Component {
               height: '500px',    
               width: '800px' }} 
             >
-            // {this.getAllUsers()}
             <button onClick={this.addRow.bind(this)}>Add Row</button>
             <button onClick={this.saveRow}>Save</button>
+            <button onClick={this.removeRow}>Delete</button>
               <AgGridReact
                 rowSelection="multiple"
                 onGridReady={ params => this.gridApi = params.api }

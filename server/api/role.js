@@ -32,5 +32,33 @@ role.checkUser(email, (err, role) => {
   });
 });
 
+router.post('/', (req, res) => {
+  var email = req.body.email;
+  var edgerole = req.body.edgerole;
+  role.insert(email, edgerole, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.delete('/d/:email', (req, res) => {
+  var email = req.body.email;
+  role.delete(email, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
+
+router.post('/u', (req, res) => {
+  var email = req.body.email;
+  var edgerole = req.body.edgerole;
+  role.update(email, edgerole, (err, result) => {
+    if (err)
+      return res.json(err);
+    return res.json(result);
+  });
+});
 
 module.exports = router ;

@@ -65,17 +65,16 @@ class ManageGrid extends Component {
     }
 
     updateRows = () => {
-      const selectedNodes = this.gridApi.getSelectedNodes()
-      const rowData = selectedNodes.map( node => node.data )
-      rowData.forEach(row=>{
+      this.gridApi.forEachNode(node => {
+        console.log(node.data.id);
         let evie = {}
-        evie['id'] = row.id
-        evie['eventtime'] = row.eventtime
-        evie['eventtype'] = row.eventtype
-        evie['eventlocation'] = row.eventlocation
-        evie['title'] = row.title
-        evie['description'] = row.description        
-        if (row.id === null) {
+        evie['id'] = node.data.id
+        evie['eventtime'] = node.data.eventtime
+        evie['eventtype'] = node.data.eventtype
+        evie['eventlocation'] = node.data.eventlocation
+        evie['title'] = node.data.title
+        evie['description'] = node.data.description        
+        if (node.data.id === null) {
         fetch('http://localhost:5000/api/events/', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
