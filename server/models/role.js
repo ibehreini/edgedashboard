@@ -10,8 +10,16 @@ class role
     });
   }
   
-  static checkUserExists (email, callback) {
-    db.query( 'SELECT COUNT(*) FROM Role WHERE email = $1', [email], (err, res) => {
+  static checkRole (email, callback) {
+    db.query('SELECT * from role where email = $1', [email], (err, res) => {
+      if (err.error)
+        return callback(err);
+      callback(res);
+    });
+  }
+  
+  static checkUser (email, callback) {
+    db.query('SELECT COUNT(*) from role where email = $1', [email], (err, res) => {
       if (err.error)
         return callback(err);
       callback(res);
