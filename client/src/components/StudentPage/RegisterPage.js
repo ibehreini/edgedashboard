@@ -10,7 +10,7 @@ class RegisterPage extends Component {
       notes: '',
       value: "",
       regData: []
-    }  
+    }
   // this.handleChangedName = this.handleChangedName.bind(this);
 }
 /*
@@ -67,7 +67,7 @@ componentDidMount = () => {
         <div><h2>Register for {this.props.upcomingEvent[2]}</h2></div>
         <div>Name: {localStorage.getItem('email')}</div>
         <div><label>Form of transportation {this.state.regData.transportneeds}
-        <select value={this.state.selectedTransport} 
+        <select value={this.state.selectedTransport}
               onChange={(e) => this.setState({selectedTransport: e.target.value}, () => console.log(this.state)) }>
             <option value="" disabled selected>Select Method of Transport</option>
             <option value = 'pickup'>Pickup</option>
@@ -81,7 +81,7 @@ componentDidMount = () => {
     );
   }
   handleForm() {
-    if (document.readyState = "complete"){
+    if (document.readyState === "complete"){
     var num = document.getElementById("uname").value;
     var num1 = document.getElementById("pussy").value;
     console.log(num);
@@ -90,7 +90,7 @@ componentDidMount = () => {
   }
 
   chooseForm = () => {
-    
+
   }
 
 
@@ -102,5 +102,5 @@ componentDidMount = () => {
       );
     }
   }
-  
+
 export default RegisterPage;

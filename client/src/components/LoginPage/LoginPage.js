@@ -10,7 +10,7 @@ class LoginPage extends Component {
       password: "",
       profile: null,
       value: ""
-    });  
+    });
 }
 
 handleChangedUsername=(event) => {
@@ -37,7 +37,7 @@ handleSubmit = (event) => {
     );
   }
   handleForm = () => {
-    if (document.readyState = "complete"){
+    if (document.readyState === "complete"){
     var num = document.getElementById("uname").value;
     var num1 = document.getElementById("pussy").value;
     console.log(num);
@@ -58,14 +58,15 @@ handleSubmit = (event) => {
       });
     }
 
-  checkRole = () => {
-    if (this.state.profile[0][1] == 'student') {
+  checkRole = () =>
+  {
+    if (this.state.profile[0][1] === 'student') {
       this.props.history.push('/student');
     }
-    if (this.state.profile[0][1] == 'mentor') {
+    if (this.state.profile[0][1] === 'mentor') {
       this.props.history.push('/mentor');
     }
-    if (this.state.profile[0][1] == 'staff') {
+    if (this.state.profile[0][1] === 'staff') {
       this.props.history.push('/staff/workshops');
     }
     this.props.authentication(this.state.profile)
@@ -87,5 +88,5 @@ cookiePolicy={'single_host_origin'}
       );
     }
   }
-  
+
 export default withRouter(LoginPage);

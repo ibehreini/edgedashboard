@@ -26,11 +26,11 @@ const StaffEventView = () => (
 
 const StaffManagePage = () => (
 	<ManagePage />
-); 
+);
 
 const StaffMembers = () => (
 	<Members />
-); 
+);
 
 const StaffTimesheetView = () => (
   <TimesheetPage />
@@ -49,13 +49,13 @@ class App extends Component {
     super()
     this.state = ({
       isLoggedIn: false
-    });  
-}
+    });
+  }
 
 
   authentication = (profile) => {
     if (profile != null) {
-    this.setState({isLoggedIn: true}, function() {console.log('blah')} );
+    this.setState({isLoggedIn: true}, function() {console.log( 'Logged in' )} );
     localStorage.setItem( 'isLoggedIn', true);
     localStorage.setItem( 'email', profile[0][0]);
     localStorage.setItem( 'role', profile[0][1]);
@@ -63,7 +63,7 @@ class App extends Component {
   else {
     console.log('error: profile must have been empty');
   }
-  } 
+  }
 
 /*
   componentDidMount = () => {
@@ -75,20 +75,22 @@ class App extends Component {
     }
   };*/
 
-  render() {
-    console.log(localStorage.getItem('isLoggedIn'));
-    console.log(localStorage.getItem('role'));
+  render()
+  {
+    if (localStorage.getItem('isLoggedIn'))
+      console.log(localStorage.getItem('role'));
+    else
+      console.log( "Not logged in" );
     if (localStorage.getItem('isLoggedIn') === "false") {
       return (
-      <Router>         
+      <Router>
         <Route path="/" render={ () => (<LoginPage authentication={this.authentication} />)}/>
       </Router>)
     }
     if (localStorage.getItem('role') === 'student' && localStorage.getItem('isLoggedIn') === 'true') {
-      // localStorage.setItem('isLoggedIn', false);
       return (
         <Router>
-          <div className="AppStu">
+          <div className="App">
             <Route path="/student" component={Student} />
           </div>
         </Router>
@@ -114,9 +116,9 @@ class App extends Component {
             <Route path="/staff/members" component={StaffMembers} />
             </div>
             </Router>
-      )}  
+      )}
       return (
-        <Router>         
+        <Router>
         <Route path="/" render={ () => (<LoginPage authentication={this.authentication} />)}/>
       </Router>
       )
